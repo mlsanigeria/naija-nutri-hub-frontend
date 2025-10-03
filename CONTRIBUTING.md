@@ -27,7 +27,7 @@ If you have a question about how to use **NAIJA-NUTRI-HUB-FRONTEND** or want to 
 
 A great bug report helps us fix the issue faster. Please follow these steps:
 
-1.  **Check Existing Issues:** Search the **[GitHub Issues page](https://www.google.com/search?q=link/to/your/issues/page)** to see if the bug has already been reported.
+1.  **Check Existing Issues:** Search the **[GitHub Issues page](https://github.com/mlsanigeria/naija-nutri-hub-frontend/issues)** to see if the bug has already been reported.
 2.  **Open a New Issue:** If not, open a new issue and choose the **"Bug Report"** template.
 3.  **Be Detailed:**
       * **What version of NAIJA-NUTRI-HUB-FRONTEND are you using?** (e.g., v1.2.3)
