@@ -74,7 +74,7 @@
     --destructive: oklch(0.7033 0.184 38.93);
     /* Border color for the OTP boxes */
     --border: oklch(0.4532 0 0);
-    --input: oklch(0.4532 0 0);
+    --input: oklch(45.316% 0.00005 271.152);
     /* Focus Ring color */
     --ring: oklch(0.937 0 0);
 

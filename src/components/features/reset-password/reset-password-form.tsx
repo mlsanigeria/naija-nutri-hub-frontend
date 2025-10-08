@@ -71,7 +71,7 @@ export const ResetPasswordForm = () => {
                     autoComplete="new-password"
                     id="password"
                     placeholder="Enter Password"
-                    className="background border rounded-md pl-10 pr-10 h-12 text-input placeholder:text-input"
+                    className="background border rounded-md pl-10 pr-10 h-12 text-input focus:text-input placeholder:text-input"
                     {...field}
                   />
                   <img
