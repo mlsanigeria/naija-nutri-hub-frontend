@@ -1,15 +1,11 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
-
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-  --font-source-serif-pro: var(--font-source-serif-pro);
-  --font-manrope: var(--font-manrope);
+  --font-serif: var(--font-source-serif-pro);
+  --font-sans: var(--font-manrope);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -46,111 +42,67 @@
 }
 
 :root {
-    --radius: 0.625rem;
-    --font-geist-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    --font-geist-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-    --font-serif: "Georgia", "Times New Roman", serif; /* Added for headings to match the design */
-
-    --background: oklch(0.2768 0 0);
-    /* Main Text Color ("We sent you a mail") */
-    --foreground: oklch(1 0 0);
-    --card: oklch(0.24 0.003 294);
-    --card-foreground: oklch(0.96 0.002 294);
-    /* Popover Background */
-    --popover: oklch(0.24 0.003 294);
-    --popover-foreground: oklch(0.96 0.002 294);
-    /* Button Color (The orange/peach color) */
-    --primary: oklch(0.7432 0.1547 40.01);
-    /* Text Color on the button (A dark color for contrast) */
-    --primary-foreground: oklch(1 0 0);
-    --secondary: oklch(0.35 0.002 294);
-    --secondary-foreground: oklch(0.96 0.002 294);
-    --muted: oklch(0.35 0.002 294);
-    /* Muted Text Color (The subtitle text) */
-    --muted-foreground: oklch(0.937 0 0);
-    --accent: oklch(0.937 0 0);
-    --accent-foreground: oklch(0.937 0 0);
-    /* Error/Destructive color */
-    --destructive: oklch(0.7033 0.184 38.93);
-    /* Border color for the OTP boxes */
-    --border: oklch(0.4532 0 0);
-    --input: oklch(0.4532 0 0);
-    /* Focus Ring color */
-    --ring: oklch(0.937 0 0);
-
-    --chart-1: oklch(0.488 0.243 264.376);
-    --chart-2: oklch(0.696 0.17 162.48);
-    --chart-3: oklch(0.769 0.188 70.08);
-    --chart-4: oklch(0.627 0.265 303.9);
-    --chart-5: oklch(0.645 0.246 16.439);
-    --sidebar: oklch(0.205 0 0);
-    --sidebar-foreground: oklch(0.985 0 0);
-    --sidebar-primary: oklch(0.488 0.243 264.376);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.269 0 0);
-    --sidebar-accent-foreground: oklch(0.985 0 0);
-    --sidebar-border: oklch(1 0 0 / 10%);
-    --sidebar-ring: oklch(0.556 0 0);
-}
-
-.dark {
-    /* Page Background */
-    --background: oklch(0.2768 0 0);
-    /* Main Text Color ("We sent you a mail") */
-    --foreground: oklch(1 0 0);
-    --card: oklch(0.24 0.003 294);
-    --card-foreground: oklch(0.96 0.002 294);
-    /* Popover Background */
-    --popover: oklch(0.24 0.003 294);
-    --popover-foreground: oklch(0.96 0.002 294);
-    /* Button Color (The orange/peach color) */
-    --primary: oklch(0.7432 0.1547 40.01);
-    /* Text Color on the button (A dark color for contrast) */
-    --primary-foreground: oklch(1 0 0);
-    --secondary: oklch(0.35 0.002 294);
-    --secondary-foreground: oklch(0.96 0.002 294);
-    --muted: oklch(0.35 0.002 294);
-    /* Muted Text Color (The subtitle text) */
-    --muted-foreground: oklch(0.937 0 0);
-    --accent: oklch(0.937 0 0);
-    --accent-foreground: oklch(0.937 0 0);
-    /* Error/Destructive color */
-    --destructive: oklch(0.7033 0.184 38.93);
-    /* Border color for the OTP boxes */
-    --border: oklch(0.4532 0 0);
-    --input: oklch(0.4532 0 0);
-    /* Focus Ring color */
-    --ring: oklch(0.937 0 0);
-
-    --chart-1: oklch(0.488 0.243 264.376);
-    --chart-2: oklch(0.696 0.17 162.48);
-    --chart-3: oklch(0.769 0.188 70.08);
-    --chart-4: oklch(0.627 0.265 303.9);
-    --chart-5: oklch(0.645 0.246 16.439);
-    --sidebar: oklch(0.205 0 0);
-    --sidebar-foreground: oklch(0.985 0 0);
-    --sidebar-primary: oklch(0.488 0.243 264.376);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.269 0 0);
-    --sidebar-accent-foreground: oklch(0.985 0 0);
-    --sidebar-border: oklch(1 0 0 / 10%);
-    --sidebar-ring: oklch(0.556 0 0);
+  --radius: 0.625rem;
+  --background: #282828;
+  --foreground: #ffffff;
+  --card: #3a3a3a;
+  --card-foreground: #ffffff;
+  --popover: #3a3a3a;
+  --popover-foreground: #ffffff;
+  --primary: #fc865c;
+  --primary-foreground: #ffffff;
+  --secondary: #4a4a4a;
+  --secondary-foreground: #ffffff;
+  --muted: #4a4a4a;
+  --muted-foreground: #cccccc;
+  --accent: #fc865c;
+  --accent-foreground: #ffffff;
+  --destructive: #ef4444;
+  --border: #555555;
+  --input: #4a4a4a;
+  --ring: #fc865c;
+  --chart-1: #fc865c;
+  --chart-2: #ff9a6b;
+  --chart-3: #ffad82;
+  --chart-4: #ffc099;
+  --chart-5: #ffd3b0;
+  --sidebar: #3a3a3a;
+  --sidebar-foreground: #ffffff;
+  --sidebar-primary: #fc865c;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #4a4a4a;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: #555555;
+  --sidebar-ring: #fc865c;
 }
 
 @layer base {
-    * {
-        @apply border-border outline-ring/50;
-    }
-    body {
-        @apply bg-background text-foreground;
-    }
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground font-sans;
+  }
 
-    .scrollbar-hide::-webkit-scrollbar {
-        display: none;
-    }
-    
-    .scrollbar-hide {
-        -ms-overflow-style: none;
-        scrollbar-width: none;    
-    }
+  /* Headers use Source Serif Pro */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-serif;
+  }
+
+  /* Body text uses Manrope */
+  p,
+  span,
+  div,
+  a,
+  button,
+  input,
+  textarea,
+  label {
+    @apply font-sans;
+  }
 }
