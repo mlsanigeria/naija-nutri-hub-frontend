@@ -20,6 +20,7 @@ def initialize_api():
         "state": "closed",
         "sort": "updated",
         "direction": "desc",
+        "base": "main",
         'per_page': 100,  # Number of PRs per page (max is typically 100)
         'page': 1,  # Start with page 1
     }
