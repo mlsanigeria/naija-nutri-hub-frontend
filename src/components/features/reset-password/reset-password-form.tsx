@@ -56,31 +56,38 @@ export const ResetPasswordForm = () => {
       <form
         method="POST"
         onSubmit={form.handleSubmit(onSubmit)}
+        className="space-y-6"
       >
         <FormField
           control={form.control}
           name="password"
           render={({ field }) => (
             <FormItem>
-              <FormLabel htmlFor="password">Password</FormLabel>
+              <FormLabel htmlFor="password" className="text-foreground text-sm leading-none" style={{ fontFamily: "var(--font-manrope)" }}>Password</FormLabel>
               <FormControl>
                 <div className="relative">
                   <Input
                     type={showPassword ? "text" : "password"}
                     autoComplete="new-password"
                     id="password"
-                    className="pr-12"
+                    placeholder="Enter Password"
+                    className="background border rounded-md pl-10 pr-10 h-12 text-input placeholder:text-input"
                     {...field}
+                  />
+                  <img
+                    src="/icons/square-lock-password.png"
+                    alt="lock"
+                    className="absolute left-3 top-1/2 -translate-y-1/2 size-5"
                   />
                   <Button
                     type="button"
                     id="toggle-password"
                     aria-label="Show password as plain text. Warning: this will display your password on the screen."
-                    variant="ghost"
+                    variant="link"
                     size="icon"
                     onClick={() => setShowPassword((prevState) => !prevState)}
                     disabled={form.getValues("password").length === 0}
-                    className="absolute right-2 top-1/2 -translate-y-1/2 disabled:cursor-not-allowed"
+                    className="absolute right-2 top-1/2 -translate-y-1/2 disabled:cursor-not-allowed text-muted-foreground"
                   >
                     {showPassword ? (
                       <EyeOffIcon aria-hidden="true" className="size-4" />
@@ -102,7 +109,7 @@ export const ResetPasswordForm = () => {
           name="confirmPassword"
           render={({ field }) => (
             <FormItem>
-              <FormLabel htmlFor="confirm-new-password">
+              <FormLabel htmlFor="confirm-new-password" className="text-foreground text-sm leading-none" style={{ fontFamily: "var(--font-manrope)" }}>
                 Confirm Password
               </FormLabel>
               <FormControl>
@@ -111,20 +118,26 @@ export const ResetPasswordForm = () => {
                     type={showConfirmPassword ? "text" : "password"}
                     autoComplete="new-password"
                     id="confirm-new-password"
-                    className="pr-12"
+                    placeholder="Re-enter Password"
+                    className="background border rounded-md pl-10 pr-10 h-12 text-input placeholder:text-input"
                     {...field}
+                  />
+                  <img
+                      src="/icons/square-lock-password.png"
+                      alt="lock"
+                      className="absolute left-3 top-1/2 -translate-y-1/2 size-5"
                   />
                   <Button
                     type="button"
                     id="toggle-confirm-password"
                     aria-label="Show password as plain text. Warning: this will display your password on the screen."
-                    variant="ghost"
+                    variant="link"
                     size="icon"
                     onClick={() =>
                       setShowConfirmPassword((prevState) => !prevState)
                     }
                     disabled={form.getValues("confirmPassword").length === 0}
-                    className="absolute right-2 top-1/2 -translate-y-1/2 disabled:cursor-not-allowed"
+                    className="absolute right-2 top-1/2 -translate-y-1/2 disabled:cursor-not-allowed text-muted-foreground"
                   >
                     {showConfirmPassword ? (
                       <EyeOffIcon aria-hidden="true" className="size-4" />
@@ -141,7 +154,7 @@ export const ResetPasswordForm = () => {
             </FormItem>
           )}
         />
-        <Button type="submit">Reset Password</Button>
+        <Button type="submit" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-3 rounded-md h-12 font-medium text-sm leading-none" style={{ fontFamily: "var(--font-source-serif-pro)" }}>Update Password</Button>
       </form>
     </Form>
   );
