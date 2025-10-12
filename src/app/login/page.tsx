@@ -11,7 +11,7 @@ export default function LoginPage() {
         <LoginForm />
         <div className="mt-6 text-center">
           <p className="text-white text-sm leading-none" style={{ fontFamily: 'var(--font-manrope)' }}>
-            Don't have an account?{" "}
+            Don&apos;t have an account?{" "}
             <Link href="/signup" className="font-bold">
               Sign up
             </Link>
