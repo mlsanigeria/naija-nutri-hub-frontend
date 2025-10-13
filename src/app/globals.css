@@ -52,32 +52,32 @@
   --font-serif:
     "Georgia", "Times New Roman", serif; /* Added for headings to match the design */
 
-  --background: oklch(0.2768 0 0);
-  /* Main Text Color ("We sent you a mail") */
-  --foreground: oklch(1 0 0);
-  --card: oklch(0.24 0.003 294);
-  --card-foreground: oklch(0.96 0.002 294);
-  /* Popover Background */
-  --popover: oklch(0.24 0.003 294);
-  --popover-foreground: oklch(0.96 0.002 294);
-  /* Button Color (The orange/peach color) */
-  --primary: oklch(0.7432 0.1547 40.01);
-  /* Text Color on the button (A dark color for contrast) */
-  --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.35 0.002 294);
-  --secondary-foreground: oklch(0.96 0.002 294);
-  --muted: oklch(0.35 0.002 294);
-  /* Muted Text Color (The subtitle text) */
-  --muted-foreground: oklch(0.937 0 0);
-  --accent: oklch(0.937 0 0);
-  --accent-foreground: oklch(0.937 0 0);
-  /* Error/Destructive color */
-  --destructive: oklch(0.7033 0.184 38.93);
-  /* Border color for the OTP boxes */
-  --border: oklch(0.4532 0 0);
-  --input: oklch(0.4532 0 0);
-  /* Focus Ring color */
-  --ring: oklch(0.937 0 0);
+    --background: oklch(0.2768 0 0);
+    /* Main Text Color ("We sent you a mail") */
+    --foreground: oklch(1 0 0);
+    --card: oklch(0.24 0.003 294);
+    --card-foreground: oklch(0.96 0.002 294);
+    /* Popover Background */
+    --popover: oklch(0.24 0.003 294);
+    --popover-foreground: oklch(0.96 0.002 294);
+    /* Button Color (The orange/peach color) */
+    --primary: oklch(0.7432 0.1547 40.01);
+    /* Text Color on the button (A dark color for contrast) */
+    --primary-foreground: oklch(1 0 0);
+    --secondary: oklch(0.35 0.002 294);
+    --secondary-foreground: oklch(0.96 0.002 294);
+    --muted: oklch(0.35 0.002 294);
+    /* Muted Text Color (The subtitle text) */
+    --muted-foreground: oklch(0.937 0 0);
+    --accent: oklch(0.937 0 0);
+    --accent-foreground: oklch(0.937 0 0);
+    /* Error/Destructive color */
+    --destructive: oklch(0.7033 0.184 38.93);
+    /* Border color for the OTP boxes */
+    --border: oklch(0.4532 0 0);
+    --input: oklch(45.316% 0.00005 271.152);
+    /* Focus Ring color */
+    --ring: oklch(0.937 0 0);
 
   --chart-1: oklch(0.488 0.243 264.376);
   --chart-2: oklch(0.696 0.17 162.48);

@@ -36,11 +36,29 @@ export const LoginFormSchema = z
 
 export const SignupFormSchema = z
   .object({
+    first_name: z
+      .string()
+      .trim()
+      .min(1, {
+        message: "First name is required.",
+      })
+      .max(30, {
+        message: "First name cannot exceed 30 characters.",
+      }),
+    last_name: z
+      .string()
+      .trim()
+      .min(1, {
+        message: "Last name is required",
+      })
+      .max(30, {
+        message: "Last name cannot exceed 30 characters.",
+      }),
     username: z
       .string()
       .trim()
       .min(1, {
-        message: "Username must start with a letter.",
+        message: "Username is required.",
       })
       .max(30, {
         message: "Username cannot exceed 30 characters.",

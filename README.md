@@ -83,20 +83,19 @@ Naija Nutri Hub enables users to take or upload a photo of a meal and receive:
 Watch our info session on how to get started with Hacktoberfest and contribute to this project on  
 🎥 [YouTube](https://youtu.be/pC_5E3AcrZc)
 
----
 
 ## 🏆 **Leaderboard**
 
 We maintain a leaderboard to celebrate top contributors!  
 Your merged PRs count toward your Hacktoberfest and leaderboard ranking.
 
-| Rank | Contributor | Merged PRs |
-|------|--------------|------------|
-| 🥇 1 | <img src='https://avatars.githubusercontent.com/u/116392457?v=4' width='30' height='30'> [alexgrate](https://github.com/alexgrate) | 3 |
-| 🥇 2 | <img src='https://avatars.githubusercontent.com/u/193773700?v=4' width='30' height='30'> [aryadharmadhikari](https://github.com/aryadharmadhikari) | 3 |
-| 🥇 3 | <img src='https://avatars.githubusercontent.com/u/131811805?v=4' width='30' height='30'> [Seyi-Amusan](https://github.com/Seyi-Amusan) | 3 |
-| 🥈 4 | <img src='https://avatars.githubusercontent.com/u/101010436?v=4' width='30' height='30'> [MichaelOmoniyi](https://github.com/MichaelOmoniyi) | 2 |
-| 🥉 5 | <img src='https://avatars.githubusercontent.com/u/73708569?v=4' width='30' height='30'> [Jonniie](https://github.com/Jonniie) | 1 |
+| S/N | Rank || Contributor | Merged PRs |
+|--| ---- | -- |----------- | ---------- |
+| 1 | 🥇 | <img src='https://avatars.githubusercontent.com/u/116392457?v=4' alt='Avatar' width='30' height='30'> | [alexgrate](https://github.com/alexgrate) | 4 |
+| 2 | 🥈 | <img src='https://avatars.githubusercontent.com/u/193773700?v=4' alt='Avatar' width='30' height='30'> | [aryadharmadhikari](https://github.com/aryadharmadhikari) | 3 |
+| 3 | 🥈 | <img src='https://avatars.githubusercontent.com/u/131811805?v=4' alt='Avatar' width='30' height='30'> | [Seyi-Amusan](https://github.com/Seyi-Amusan) | 3 |
+| 4 | 🥉 | <img src='https://avatars.githubusercontent.com/u/101010436?v=4' alt='Avatar' width='30' height='30'> | [MichaelOmoniyi](https://github.com/MichaelOmoniyi) | 2 |
+| 5 | 4 | <img src='https://avatars.githubusercontent.com/u/73708569?v=4' alt='Avatar' width='30' height='30'> | [Jonniie](https://github.com/Jonniie) | 1 |
 
 > 🎉 Thank you to all contributors for making Hacktoberfest Open Source Challenge 3.0 a success!  
 > Check out the full [leaderboard here](LEADERBOARD.md).
