@@ -14,8 +14,7 @@ export default function UploadImagePage() {
 
   return (
     <div className="min-h-screen text-white flex flex-col items-center justify-center p-5">
-          <div className="w-full max-w-md">
-              
+      <div className="w-full max-w-md">
         {/* Header */}
         <div className="flex items-center gap-2 mb-6">
           <Link href="/scan">
@@ -54,12 +53,12 @@ export default function UploadImagePage() {
             />
           </div>
         )}
-              
+
         {/* Footer */}
         <p className="mt-10 text-sm text-neutral-400 max-w-full text-center">
-          Scan a photo or upload an image to identify your food and its nutritional information.
+          Scan a photo or upload an image to identify your food and its
+          nutritional information.
         </p>
-              
       </div>
     </div>
   );

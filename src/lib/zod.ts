@@ -114,10 +114,10 @@ export const ForgotPasswordFormSchema = z
   .object({
     email: z
       .email({
-        error: "Please provide a valid email address.",
+        message: "Please provide a valid email address.",
       })
       .max(30, {
-        error: "Email cannot exceed 30 characters.",
+        message: "Email cannot exceed 30 characters.",
       })
       .toLowerCase(),
   })
@@ -126,47 +126,47 @@ export const ForgotPasswordFormSchema = z
 export const ResetPasswordFormSchema = z
   .object({
     token: z.string().min(1, {
-      error: "Please provide a valid token.",
+      message: "Please provide a valid token.",
     }),
     password: z
       .string()
       .min(8, {
-        error: "Password must contain at least 8 characters.",
+        message: "Password must contain at least 8 characters.",
       })
       .max(64, {
-        error: "Password cannot exceed 64 characters.",
+        message: "Password cannot exceed 64 characters.",
       })
       .regex(/[a-z]/, {
-        error: "Password must contain at least one lowercase letter.",
+        message: "Password must contain at least one lowercase letter.",
       })
       .regex(/[A-Z]/, {
-        error: "Password must contain at least one uppercase letter.",
+        message: "Password must contain at least one uppercase letter.",
       })
       .regex(/\d/, {
-        error: "Password must contain at least one digit.",
+        message: "Password must contain at least one digit.",
       })
       .regex(/[^A-Za-z0-9]/, {
-        error: "Password must contain at least one special character.",
+        message: "Password must contain at least one special character.",
       }),
     confirmPassword: z
       .string()
       .min(8, {
-        error: "Password must contain at least 8 characters.",
+        message: "Password must contain at least 8 characters.",
       })
       .max(64, {
-        error: "Password cannot exceed 64 characters.",
+        message: "Password cannot exceed 64 characters.",
       })
       .regex(/[a-z]/, {
-        error: "Password must contain at least one lowercase letter.",
+        message: "Password must contain at least one lowercase letter.",
       })
       .regex(/[A-Z]/, {
-        error: "Password must contain at least one uppercase letter.",
+        message: "Password must contain at least one uppercase letter.",
       })
       .regex(/\d/, {
-        error: "Password must contain at least one digit.",
+        message: "Password must contain at least one digit.",
       })
       .regex(/[^A-Za-z0-9]/, {
-        error: "Password must contain at least one special character.",
+        message: "Password must contain at least one special character.",
       }),
   })
   .required()

@@ -60,12 +60,18 @@ export const SignupForm = () => {
               name="first_name"
               render={({ field }) => (
                 <FormItem className="space-y-2">
-                  <FormLabel htmlFor="first_name" className="text-foreground text-sm leading-none" style={{ fontFamily: 'var(--font-manrope)' }}>First name</FormLabel>
+                  <FormLabel
+                    htmlFor="first_name"
+                    className="text-foreground text-sm leading-none"
+                    style={{ fontFamily: "var(--font-manrope)" }}
+                  >
+                    First name
+                  </FormLabel>
                   <FormControl>
-                    <Input 
+                    <Input
                       id="first_name"
                       autoComplete="given-name"
-                      placeholder="First name" 
+                      placeholder="First name"
                       className="background border rounded-md h-12 text-input focus:text-foreground placeholder:text-input"
                       {...field}
                     />
@@ -80,12 +86,18 @@ export const SignupForm = () => {
               name="last_name"
               render={({ field }) => (
                 <FormItem className="space-y-2">
-                  <FormLabel htmlFor="last_name" className="text-foreground text-sm leading-none" style={{ fontFamily: 'var(--font-manrope)' }}>Last name</FormLabel>
+                  <FormLabel
+                    htmlFor="last_name"
+                    className="text-foreground text-sm leading-none"
+                    style={{ fontFamily: "var(--font-manrope)" }}
+                  >
+                    Last name
+                  </FormLabel>
                   <FormControl>
-                    <Input 
+                    <Input
                       id="last_name"
                       autoComplete="family-name"
-                      placeholder="Last name" 
+                      placeholder="Last name"
                       className="background border rounded-md h-12 text-input focus:text-foreground placeholder:text-input"
                       {...field}
                     />
@@ -101,14 +113,20 @@ export const SignupForm = () => {
             name="username"
             render={({ field }) => (
               <FormItem className="space-y-2">
-                <FormLabel htmlFor="username" className="text-foreground text-sm leading-none" style={{ fontFamily: 'var(--font-manrope)' }}>Username</FormLabel>
+                <FormLabel
+                  htmlFor="username"
+                  className="text-foreground text-sm leading-none"
+                  style={{ fontFamily: "var(--font-manrope)" }}
+                >
+                  Username
+                </FormLabel>
                 <FormControl>
                   <div className="relative">
                     <User2 className="absolute left-3 top-1/2 -translate-y-1/2 text-input size-5" />
-                    <Input 
+                    <Input
                       id="username"
                       autoComplete="username"
-                      placeholder="Enter username" 
+                      placeholder="Enter username"
                       className="background border rounded-md pl-10 h-12 text-input focus:text-foreground placeholder:text-input"
                       {...field}
                     />
@@ -123,7 +141,13 @@ export const SignupForm = () => {
             name="email"
             render={({ field }) => (
               <FormItem className="space-y-2">
-                <FormLabel htmlFor="email" className="text-foreground text-sm leading-none" style={{ fontFamily: 'var(--font-manrope)' }}>Email</FormLabel>
+                <FormLabel
+                  htmlFor="email"
+                  className="text-foreground text-sm leading-none"
+                  style={{ fontFamily: "var(--font-manrope)" }}
+                >
+                  Email
+                </FormLabel>
                 <FormControl>
                   <div className="relative">
                     <MailIcon className="absolute left-3 top-1/2 -translate-y-1/2 text-input size-5" />
@@ -146,7 +170,13 @@ export const SignupForm = () => {
             name="password"
             render={({ field }) => (
               <FormItem className="space-y-2">
-                <FormLabel htmlFor="password" className="text-foreground text-sm leading-none" style={{ fontFamily: 'var(--font-manrope)' }}>Password</FormLabel>
+                <FormLabel
+                  htmlFor="password"
+                  className="text-foreground text-sm leading-none"
+                  style={{ fontFamily: "var(--font-manrope)" }}
+                >
+                  Password
+                </FormLabel>
                 <FormControl>
                   <div className="relative">
                     <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-input size-5" />
@@ -181,17 +211,25 @@ export const SignupForm = () => {
                 </FormControl>
                 <div className="flex items-center space-x-2 text-muted-foreground text-sm">
                   <Info className="size-4 text-[#9CA3AF]" />
-                  <span style={{ fontFamily: 'var(--font-manrope)', fontSize: '12px' }} className="text-[#565656]">Must contain 1 uppercase letter, 1 number and a minimum of 8 characters</span>
+                  <span
+                    style={{
+                      fontFamily: "var(--font-manrope)",
+                      fontSize: "12px",
+                    }}
+                    className="text-[#565656]"
+                  >
+                    Must contain 1 uppercase letter, 1 number and a minimum of 8
+                    characters
+                  </span>
                 </div>
                 <FormMessage className="text-destructive" />
               </FormItem>
             )}
           />
-          <Button 
-            type="submit" 
+          <Button
+            type="submit"
             className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-3 rounded-md h-12 font-semibold text-sm leading-none"
-            style={{ fontFamily: 'var(--font-source-serif-pro)' }}
-
+            style={{ fontFamily: "var(--font-source-serif-pro)" }}
           >
             Create account
           </Button>

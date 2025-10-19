@@ -7,6 +7,7 @@ This document outlines the comprehensive guidelines for contributing to **NAIJA-
 ### 🍽️ About Naija Nutri Hub
 
 **Naija Nutri Hub** is an end-to-end, AI-powered food platform that allows users to:
+
 - **Take or upload photos** of meals and receive instant food classification
 - **Get nutritional estimates** and calorie information for Nigerian dishes
 - **Access recipe suggestions** with step-by-step cooking instructions
@@ -51,6 +52,7 @@ If you have a question about how to use **NAIJA-NUTRI-HUB-FRONTEND** or want to 
 A great bug report helps us fix the issue faster. Please follow these steps:
 
 ### Before Reporting
+
 1.  **Check Existing Issues:** Search the **[GitHub Issues page](https://github.com/mlsanigeria/naija-nutri-hub-frontend/issues)** to see if the bug has already been reported.
 2.  **Open a New Issue:** If not, open a new issue and choose the **"Bug Report"** template.
 3.  **Be Detailed:**
@@ -81,6 +83,7 @@ Ready to dive into the code? Awesome\! To ensure a smooth process, please follow
 ### 1\. Development Environment Setup
 
 #### Prerequisites
+
 - **Node.js**: Version 18.17 or higher
 - **npm**: Version 9.0 or higher (comes with Node.js)
 - **Git**: Latest version
@@ -101,9 +104,11 @@ Ready to dive into the code? Awesome\! To ensure a smooth process, please follow
 - **Push your branch** to your fork: `git push origin your-branch-name`
 
 5.  **Start the development server:**
+
     ```bash
     npm run dev
     ```
+
     The application will be available at `http://localhost:3000`
 
 6.  **Verify the setup:**
@@ -112,6 +117,7 @@ Ready to dive into the code? Awesome\! To ensure a smooth process, please follow
     - Run the linter to ensure code quality: `npm run lint`
 
 #### Available Scripts
+
 - `npm run dev` - Start development server with Turbopack
 - `npm run build` - Build the application for production
 - `npm run start` - Start production server
@@ -139,6 +145,7 @@ git checkout -b refactor/describe-the-refactor
 ```
 
 **Branch Naming Convention:**
+
 - Use lowercase letters and hyphens
 - Start with the type of change: `fix/`, `feature/`, `docs/`, `refactor/`
 - Be descriptive but concise
@@ -146,6 +153,7 @@ git checkout -b refactor/describe-the-refactor
 ### 3\. Coding Standards & Style Guide
 
 #### TypeScript & JavaScript Guidelines
+
 - **Use TypeScript** for all new files and components
 - **Enable strict mode** - all TypeScript strict checks are enabled
 - **Define proper types** for all props, state, and function parameters
@@ -155,30 +163,34 @@ git checkout -b refactor/describe-the-refactor
 - **Implement proper error handling** with try-catch blocks where appropriate
 
 #### React Component Guidelines
+
 - **Use functional components** with hooks (no class components)
 - **Follow the component structure**:
+
   ```tsx
   // 1. Imports
-  import React from 'react'
-  import { ComponentProps } from './types'
-  
+  import React from "react";
+  import { ComponentProps } from "./types";
+
   // 2. Component definition
   export function ComponentName({ prop1, prop2 }: ComponentProps) {
     // 3. Hooks
-    const [state, setState] = useState()
-    
+    const [state, setState] = useState();
+
     // 4. Event handlers
-    const handleClick = () => {}
-    
+    const handleClick = () => {};
+
     // 5. Render
-    return <div>...</div>
+    return <div>...</div>;
   }
   ```
+
 - **Use proper prop destructuring** and type definitions
 - **Implement proper key props** for list items
 - **Use React.memo()** for performance optimization when needed
 
 #### File & Folder Structure
+
 - **Use PascalCase** for component files: `UserProfile.tsx`
 - **Use camelCase** for utility files: `apiHelpers.ts`
 - **Use kebab-case** for page files: `user-profile/page.tsx`
@@ -186,6 +198,7 @@ git checkout -b refactor/describe-the-refactor
 - **Keep UI components** in `src/components/ui/` (shadcn/ui components)
 
 #### Tailwind CSS Guidelines
+
 - **Use utility classes** instead of custom CSS when possible
 - **Follow the design system** defined in `src/app/globals.css`
 - **Use CSS variables** for consistent theming
@@ -193,6 +206,7 @@ git checkout -b refactor/describe-the-refactor
 - **Use semantic color names** from the design system
 
 #### Form Handling
+
 - **Use React Hook Form** for all form implementations
 - **Implement Zod validation** for form schemas
 - **Follow the existing form patterns** in `src/components/features/`
@@ -200,12 +214,14 @@ git checkout -b refactor/describe-the-refactor
 - **Use controlled components** for form inputs
 
 #### API Integration
+
 - **Use Axios** for HTTP requests (configured in `src/lib/axios.ts`)
 - **Implement proper error handling** for API calls
 - **Use TypeScript interfaces** for API response types
 - **Follow RESTful conventions** for API endpoints
 
 #### Code Quality
+
 - **Run ESLint** before committing: `npm run lint`
 - **Fix all linting errors** before submitting PR
 - **Write self-documenting code** with clear variable and function names
@@ -213,6 +229,7 @@ git checkout -b refactor/describe-the-refactor
 - **Keep functions small** and focused on a single responsibility
 
 #### Performance Guidelines
+
 - **Use Next.js Image component** for optimized images
 - **Implement proper loading states** for async operations
 - **Use dynamic imports** for code splitting when appropriate
@@ -221,6 +238,7 @@ git checkout -b refactor/describe-the-refactor
 ### 4\. Testing Guidelines
 
 #### Testing Requirements
+
 - **Write unit tests** for utility functions and custom hooks
 - **Test component behavior** with user interactions
 - **Test form validation** and error handling
@@ -228,12 +246,14 @@ git checkout -b refactor/describe-the-refactor
 - **Ensure accessibility** with proper ARIA labels and keyboard navigation
 
 #### Testing Tools
+
 - **Jest** for unit testing
 - **React Testing Library** for component testing
 - **MSW (Mock Service Worker)** for API mocking
 - **Accessibility testing** with axe-core
 
 ### 5\. Keep Changes Focused
+
 - **Address one issue** per pull request
 - **Don't mix bug fixes** with feature additions
 - **Don't include unrelated refactoring** in the same PR
@@ -244,36 +264,45 @@ git checkout -b refactor/describe-the-refactor
 This project uses **Husky** to enforce code quality through git hooks. These hooks run automatically and **must pass** before you can commit or push your changes.
 
 #### Pre-commit Hook
+
 The pre-commit hook runs automatically when you try to commit and checks:
 
 1. **Code Formatting (Prettier)**
+
    ```bash
    npm run check-format
    ```
+
    - Ensures consistent code formatting across the project
    - If formatting fails, you'll see: `🤢🤮🤢🤮 Its FORKING RAW - Your styling looks disgusting`
    - **Fix**: Run `npm run format` to auto-format your code
 
 2. **Code Quality (ESLint)**
+
    ```bash
    npm run lint
    ```
+
    - Checks for code quality issues, unused variables, and best practices
    - If linting fails, you'll see: `😤🏀👋😤 Get that weak shit out of here!`
    - **Fix**: Address all ESLint errors and warnings before committing
 
 #### Pre-push Hook
+
 The pre-push hook runs automatically when you try to push and checks:
 
 1. **Build Success**
+
    ```bash
    npm run build
    ```
+
    - Ensures your code compiles successfully
    - If build fails, you'll see: `❌👷🔨❌ Build failed... Is your development server still running?`
    - **Fix**: Resolve all build errors before pushing
 
 #### Manual Quality Checks
+
 Before committing, always run these commands manually:
 
 ```bash
@@ -296,6 +325,7 @@ git commit -m "feat: your commit message"
 #### Common Issues and Solutions
 
 **Formatting Issues:**
+
 ```bash
 # Auto-fix formatting
 npm run format
@@ -304,19 +334,22 @@ git commit -m "style: format code"
 ```
 
 **ESLint Warnings:**
+
 - **Unused variables**: Remove or use the variable
 - **Missing dependencies**: Add to useEffect dependency array
 - **Console.log statements**: Remove or replace with proper logging
 - **Any other warnings**: Address them before committing
 
 #### Minimizing ESLint Warnings
+
 **All ESLint warnings should be minimized** except when strictly necessary. Here's how to handle common warnings:
 
 **Unused Variables:**
+
 ```tsx
 // ❌ Bad - Unused variable warning
 const [data, setData] = useState(null);
-const unusedVar = 'not used';
+const unusedVar = "not used";
 
 // ✅ Good - Remove unused variables
 const [data, setData] = useState(null);
@@ -324,10 +357,11 @@ const [data, setData] = useState(null);
 
 // ✅ Good - Use underscore prefix for intentionally unused
 const [data, setData] = useState(null);
-const _unusedVar = 'intentionally unused';
+const _unusedVar = "intentionally unused";
 ```
 
 **Missing Dependencies:**
+
 ```tsx
 // ❌ Bad - Missing dependency warning
 useEffect(() => {
@@ -341,30 +375,33 @@ useEffect(() => {
 ```
 
 **Console Statements:**
+
 ```tsx
 // ❌ Bad - Console.log in production code
-console.log('Debug info:', data);
+console.log("Debug info:", data);
 
 // ✅ Good - Remove or use proper logging
 // console.log removed
 
 // ✅ Good - Use proper error handling
-if (process.env.NODE_ENV === 'development') {
-  console.log('Debug info:', data);
+if (process.env.NODE_ENV === "development") {
+  console.log("Debug info:", data);
 }
 ```
 
 **Import/Export Issues:**
+
 ```tsx
 // ❌ Bad - Unused import
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 // useEffect not used
 
 // ✅ Good - Remove unused imports
-import { useState } from 'react';
+import { useState } from "react";
 ```
 
 **TypeScript Warnings:**
+
 ```tsx
 // ❌ Bad - Any type usage
 const data: any = fetchData();
@@ -378,6 +415,7 @@ const data: DataType = fetchData();
 ```
 
 **Build Failures:**
+
 - Check for TypeScript errors
 - Ensure all imports are correct
 - Verify component props and types
@@ -386,29 +424,31 @@ const data: DataType = fetchData();
 ### 7\. Component Development Guidelines
 
 #### Making Component Props Optional
+
 When updating existing components, **always make new props optional** to prevent breaking changes:
 
 ```tsx
 // ❌ Bad - Breaking change
 interface ButtonProps {
-  variant: 'primary' | 'secondary';
-  size: 'sm' | 'md' | 'lg';
+  variant: "primary" | "secondary";
+  size: "sm" | "md" | "lg";
   newProp: string; // This will break existing usage
 }
 
 // ✅ Good - Backward compatible
 interface ButtonProps {
-  variant: 'primary' | 'secondary';
-  size: 'sm' | 'md' | 'lg';
+  variant: "primary" | "secondary";
+  size: "sm" | "md" | "lg";
   newProp?: string; // Optional prop with default value
 }
 
-export function Button({ variant, size, newProp = 'default' }: ButtonProps) {
+export function Button({ variant, size, newProp = "default" }: ButtonProps) {
   // Component implementation
 }
 ```
 
 #### Component Update Checklist
+
 - [ ] New props are optional with sensible defaults
 - [ ] Existing functionality remains unchanged
 - [ ] TypeScript types are properly defined
@@ -418,6 +458,7 @@ export function Button({ variant, size, newProp = 'default' }: ButtonProps) {
 ### 6\. Commit and Push
 
 #### Commit Message Guidelines
+
 Use **Conventional Commits** format for clear, consistent commit messages:
 
 ```bash
@@ -431,6 +472,7 @@ git commit -m "test(auth): add login form unit tests"
 ```
 
 **Commit Types:**
+
 - `feat`: New feature
 - `fix`: Bug fix
 - `docs`: Documentation changes
@@ -440,6 +482,7 @@ git commit -m "test(auth): add login form unit tests"
 - `chore`: Maintenance tasks
 
 #### Push Your Changes
+
 ```bash
 git push origin your-branch-name
 ```
@@ -447,9 +490,11 @@ git push origin your-branch-name
 ### 7\. Create a Pull Request (PR)
 
 #### Before Creating a PR
+
 Complete this comprehensive checklist before submitting your PR:
 
 ##### Code Quality Checklist
+
 - [ ] **Code is formatted**: Run `npm run format` and commit changes
 - [ ] **No linting errors**: Run `npm run lint` and fix all errors
 - [ ] **Minimal warnings**: Address ESLint warnings (unused variables, etc.)
@@ -460,6 +505,7 @@ Complete this comprehensive checklist before submitting your PR:
 - [ ] **Code follows style guide**: Follows project conventions
 
 ##### Git & Branch Management
+
 - [ ] **Branch is up to date**: Rebased with latest main branch
 - [ ] **No merge conflicts**: Resolved all conflicts with main
 - [ ] **Clean commit history**: Meaningful commit messages
@@ -467,6 +513,7 @@ Complete this comprehensive checklist before submitting your PR:
 - [ ] **Files are staged**: All changes are properly committed
 
 ##### Testing & Validation
+
 - [ ] **Manual testing completed**: Tested all functionality
 - [ ] **Cross-browser testing**: Works in Chrome, Firefox, Safari
 - [ ] **Mobile responsive**: Tested on mobile devices
@@ -474,12 +521,14 @@ Complete this comprehensive checklist before submitting your PR:
 - [ ] **Performance verified**: No significant performance regressions
 
 ##### Documentation & Screenshots
+
 - [ ] **Screenshots included**: Figma design, local implementation, Husky checks
 - [ ] **PR description complete**: Clear description of changes
 - [ ] **Issue referenced**: Links to related issue
 - [ ] **Breaking changes documented**: If any breaking changes exist
 
 ##### Final Commands to Run
+
 ```bash
 # 1. Update with latest main
 git checkout main
@@ -501,6 +550,7 @@ git push origin your-branch-name
 ```
 
 ##### Pre-PR Validation Script
+
 You can run this script to validate everything before creating a PR:
 
 ```bash
@@ -520,6 +570,7 @@ echo "✅ All checks passed! Ready to create PR."
 ```
 
 #### Creating the PR
+
 1. **Open a Pull Request** against the **`main`** branch
 2. **Use the PR Template** and fill out all sections:
    - **Description**: What changes were made and why
@@ -536,25 +587,26 @@ echo "✅ All checks passed! Ready to create PR."
    ```
 
 #### Required Screenshots
+
 For UI/UX changes, you **must** include these screenshots in your PR:
 
 1. **Figma Design Screenshot**
    - Screenshot of the design from [Figma](https://www.figma.com/design/JD4yFts6kF1mLQzictb2F4/hactober-fest?node-id=0-1)
    - Show the intended design and layout
    - Include any design specifications or annotations
-   
+
    **Example:**
    ![Figma Design Example](./public/images/figma.png)
-   *Screenshot showing the Figma design for the component/page being implemented*
+   _Screenshot showing the Figma design for the component/page being implemented_
 
 2. **Local Development Screenshot**
    - Screenshot of your implementation running locally
    - Show the actual rendered component/page
    - Include browser developer tools if relevant
-   
+
    **Example:**
    ![Local Development Example](./public/images/localhost.png)
-   *Screenshot showing the actual implementation running on localhost*
+   _Screenshot showing the actual implementation running on localhost_
 
 3. **Husky Checks Passed Screenshot**
    - Screenshot showing successful pre-commit and pre-push hooks
@@ -570,20 +622,22 @@ For UI/UX changes, you **must** include these screenshots in your PR:
      🤔🤔🤔🤔... We need to build your code before we push... 🤔🤔🤔🤔
      ✅ Build successful
      ```
-   
+
    **Example Terminal Output:**
+
    ```
    $ git commit -m "feat: add new login form component"
    🏗️👷  Have formatted the codebase? Checking styling, linting, and testing your project before committing.
    ✅ Prettier check passed
    ✅ ESLint check passed
-   
+
    $ git push origin feature/login-form
    🤔🤔🤔🤔... We need to build your code before we push... 🤔🤔🤔🤔
    ✅ Build successful
    ```
 
 #### Screenshot Guidelines
+
 - **High quality**: Use clear, high-resolution screenshots
 - **Full page**: Show the complete component/page, not just a portion
 - **Consistent browser**: Use the same browser for all screenshots
@@ -593,6 +647,7 @@ For UI/UX changes, you **must** include these screenshots in your PR:
 #### How to Take Screenshots
 
 **1. Figma Design Screenshot:**
+
 - Open the [Figma design](https://www.figma.com/design/JD4yFts6kF1mLQzictb2F4/hactober-fest?node-id=0-1)
 - Navigate to the specific component/page you're implementing
 - Take a full-page screenshot or crop to show the relevant design
@@ -600,9 +655,10 @@ For UI/UX changes, you **must** include these screenshots in your PR:
 
 **Example:**
 ![Figma Design Example](./public/images/figma.png)
-*Screenshot showing the Figma design for the component/page being implemented*
+_Screenshot showing the Figma design for the component/page being implemented_
 
 **2. Local Development Screenshot:**
+
 - Run your local development server: `npm run dev`
 - Navigate to the page/component you've implemented
 - Take a screenshot of the rendered page
@@ -610,9 +666,10 @@ For UI/UX changes, you **must** include these screenshots in your PR:
 
 **Example:**
 ![Local Development Example](./public/images/localhost.png)
-*Screenshot showing the actual implementation running on localhost*
+_Screenshot showing the actual implementation running on localhost_
 
 **3. Husky Checks Screenshot:**
+
 - Open your terminal/command prompt
 - Run the commit and push commands
 - Take a screenshot of the terminal showing successful checks
@@ -620,25 +677,28 @@ For UI/UX changes, you **must** include these screenshots in your PR:
 
 **Example:**
 ![Husky Checks Example](./public/images/husky-check.png)
-*Screenshot showing the actual husky check implementation*
-
+_Screenshot showing the actual husky check implementation_
 
 ## Screenshots
+
 - **Figma Design**: Shows the intended design and layout
 - **Local Implementation**: Shows the actual rendered component
 - **Husky Checks**: Confirms all quality checks passed
 
 ## Changes Made
+
 - Added new login form component
 - Implemented form validation with Zod
 - Added proper TypeScript types
 - Ensured responsive design
 
 ## Testing
+
 - [x] Component renders correctly
 - [x] Form validation works
 - [x] Responsive on mobile devices
 - [x] All Husky checks pass
+
 ```
 
 #### PR Review Process
@@ -650,7 +710,7 @@ For UI/UX changes, you **must** include these screenshots in your PR:
    - Security considerations
    - Accessibility compliance
 
-3. **Feedback and Iteration**: 
+3. **Feedback and Iteration**:
    - Address all review comments
    - Make requested changes
    - Respond to feedback professionally
@@ -685,3 +745,4 @@ Documentation is just as important as the code! Contributions to the documentati
 ## ⚖️ Licensing
 
 By contributing, you agree that your contributions will be licensed under the **MIT License**.
+```

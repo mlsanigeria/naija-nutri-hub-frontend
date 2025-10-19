@@ -8,9 +8,10 @@ Ambassadors gain exclusive access to **Microsoft resources, mentorship, and glob
 ## 💡 What is MLSA?
 
 **Microsoft Learn Student Ambassadors (MLSA)** is a program by Microsoft that empowers university students to:
-- **Learn** cutting-edge technologies through Microsoft Learn, events, and mentorship.  
-- **Lead** by organizing hackathons, workshops, and community events in their schools.  
-- **Grow** by building real-world projects and connecting with tech professionals globally.  
+
+- **Learn** cutting-edge technologies through Microsoft Learn, events, and mentorship.
+- **Lead** by organizing hackathons, workshops, and community events in their schools.
+- **Grow** by building real-world projects and connecting with tech professionals globally.
 
 If you’re passionate about **AI, cloud computing, web development, or open source**, MLSA is your perfect starting point.
 
@@ -19,11 +20,12 @@ If you’re passionate about **AI, cloud computing, web development, or open sou
 ## 🎯 Why Join Your School’s MLSA WhatsApp Community?
 
 By joining your school’s MLSA WhatsApp group, you’ll:
-- 🌍 Connect with **like-minded peers** in your university.  
-- 🧠 Stay updated on **tech events, workshops, and hackathons** near you.  
-- 💬 Access **career mentorship** from certified MLSAs and tech professionals.  
-- 💼 Get opportunities to **collaborate on open-source projects** like *Naija Nutri Hub*.  
-- 🎓 Build your **portfolio and resume** through community impact.  
+
+- 🌍 Connect with **like-minded peers** in your university.
+- 🧠 Stay updated on **tech events, workshops, and hackathons** near you.
+- 💬 Access **career mentorship** from certified MLSAs and tech professionals.
+- 💼 Get opportunities to **collaborate on open-source projects** like _Naija Nutri Hub_.
+- 🎓 Build your **portfolio and resume** through community impact.
 
 ---
 
@@ -59,6 +61,7 @@ a network of campus leads, open-source contributors, and project maintainers wor
 ---
 
 ### 🚀 Get Involved
+
 MLSA and GitHub Campus Experts are both platforms built around **collaboration, innovation, and community growth**.  
 Whether you want to learn new technologies, contribute to open source, or lead events — this is your gateway.
 
