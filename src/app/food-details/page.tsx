@@ -43,7 +43,7 @@ const Restaurants = () => (
   <p className="py-2 transition-all duration-300">Loading...</p>
 );
 
-export default function page() {
+export default function Page() {
   const [activeTab, setActiveTab] = useState("nutritional");
 
   const renderContent = () => {
