@@ -16,8 +16,14 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { ForgotPasswordFormSchema } from "@/lib/zod";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export const ForgotPasswordForm = () => {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const router = useRouter();
+
   const form = useForm<z.infer<typeof ForgotPasswordFormSchema>>({
     resolver: zodResolver(ForgotPasswordFormSchema),
     defaultValues: {
@@ -25,8 +31,35 @@ export const ForgotPasswordForm = () => {
     },
   });
 
-  function onSubmit(data: z.infer<typeof ForgotPasswordFormSchema>) {
-    console.log(data);
+  async function onSubmit(data: z.infer<typeof ForgotPasswordFormSchema>) {
+    setIsLoading(true);
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/reset-password`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: data.email }),
+        },
+      );
+
+      if (response.ok) {
+        toast.success("Password reset link sent! Please check your email.");
+        // Optionally store the email for the next step
+        //localStorage.setItem("resetEmail", data.email);
+        router.push("/verify-reset-otp");
+      } else {
+        const errorData = await response.json();
+        toast.error(
+          errorData.detail?.[0]?.msg || "Failed to send reset link. Try again.",
+        );
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Network error. Please try again later.");
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   return (
@@ -67,10 +100,11 @@ export const ForgotPasswordForm = () => {
         />
         <Button
           type="submit"
+          disabled={isLoading}
           className="w-full py-3 h-12 bg-[#FF7A50] hover:bg-[#FF7A50]/90 text-white rounded-md text-sm leading-none focus:outline-none"
           style={{ fontFamily: "var(--font-source-serif-pro)" }}
         >
-          Reset Password
+          {isLoading ? "Sending..." : "Reset Password"}
         </Button>
       </form>
     </Form>

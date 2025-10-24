@@ -1,4 +1,3 @@
-
 # **Hacktoberfest Open Source Challenge 3.0**
 
 Welcome to the **Hacktoberfest Open Source Challenge 3.0** organized by the **Microsoft Learn Student Ambassadors (MLSA) Nigeria** in collaboration with the [GitHub Campus Experts, UNILAG Community](https://chat.whatsapp.com/IgY7V6RXFcwFkhLlnvOGKq)!  
@@ -12,6 +11,7 @@ The **Microsoft Learn Student Ambassadors (MLSA)** program is a global community
 Ambassadors host workshops, mentor peers, and build open-source projects that solve real-world problems.
 
 **Joining MLSA gives you:**
+
 - 🌍 Access to a global tech community of innovators.
 - 💻 Mentorship and technical training from Microsoft experts.
 - 🧠 Opportunities to learn cutting-edge tools (AI, Cloud, DevOps, etc.).
@@ -51,10 +51,10 @@ Naija Nutri Hub enables users to take or upload a photo of a meal and receive:
 
 ## 🧩 **Project Repositories Overview**
 
-| Repository | Description |
-|-------------|-------------|
-| [naija-nutri-hub](https://github.com/mlsanigeria/naija-nutri-hub) | Core **backend + ML/AI** services |
-| [naija-nutri-hub-frontend](https://github.com/mlsanigeria/naija-nutri-hub-frontend) | **Next.js web app** (frontend) |
+| Repository                                                                                                         | Description                                               |
+| ------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------- |
+| [naija-nutri-hub](https://github.com/mlsanigeria/naija-nutri-hub)                                                  | Core **backend + ML/AI** services                         |
+| [naija-nutri-hub-frontend](https://github.com/mlsanigeria/naija-nutri-hub-frontend)                                | **Next.js web app** (frontend)                            |
 | [naija-nutri-hub-datasets](https://github.com/mlsanigeria/naija-nutri-hub/blob/main/CONTRIBUTING.md#-datasetsapis) | **Datasets + APIs** for training ML models/grounding LLMs |
 
 ---
@@ -83,24 +83,24 @@ Naija Nutri Hub enables users to take or upload a photo of a meal and receive:
 Watch our info session on how to get started with Hacktoberfest and contribute to this project on  
 🎥 [YouTube](https://youtu.be/pC_5E3AcrZc)
 
-
 ## **🏆 Leaderboard**
 
 We maintain a leaderboard to track your contributions and their impact on our projects. The more you contribute, the higher you'll climb on the leaderboard.
 
 <!-- Section Start -->
+
 ### Top 10 Contributors
 
 Thank you to all our fantastic contributors for their hard work and dedication! Here are our top 10 contributors:
 
-| S/N | Rank || Contributor | Merged PRs |
-|--| ---- | -- |----------- | ---------- |
-| 1 | 🥇 | <img src='https://avatars.githubusercontent.com/u/131811805?v=4' alt='Avatar' width='30' height='30'> | [Seyi-Amusan](https://github.com/Seyi-Amusan) | 10 |
-| 2 | 🥈 | <img src='https://avatars.githubusercontent.com/u/116392457?v=4' alt='Avatar' width='30' height='30'> | [alexgrate](https://github.com/alexgrate) | 6 |
-| 3 | 🥉 | <img src='https://avatars.githubusercontent.com/u/193773700?v=4' alt='Avatar' width='30' height='30'> | [aryadharmadhikari](https://github.com/aryadharmadhikari) | 3 |
-| 4 | 🥉 | <img src='https://avatars.githubusercontent.com/u/101010436?v=4' alt='Avatar' width='30' height='30'> | [MichaelOmoniyi](https://github.com/MichaelOmoniyi) | 3 |
-| 5 | 4 | <img src='https://avatars.githubusercontent.com/u/73708569?v=4' alt='Avatar' width='30' height='30'> | [Jonniie](https://github.com/Jonniie) | 1 |
-| 6 | 4 | <img src='https://avatars.githubusercontent.com/u/168524066?v=4' alt='Avatar' width='30' height='30'> | [kumaradarsh2](https://github.com/kumaradarsh2) | 1 |
+| S/N | Rank |                                                                                                       | Contributor                                               | Merged PRs |
+| --- | ---- | ----------------------------------------------------------------------------------------------------- | --------------------------------------------------------- | ---------- |
+| 1   | 🥇   | <img src='https://avatars.githubusercontent.com/u/131811805?v=4' alt='Avatar' width='30' height='30'> | [Seyi-Amusan](https://github.com/Seyi-Amusan)             | 10         |
+| 2   | 🥈   | <img src='https://avatars.githubusercontent.com/u/116392457?v=4' alt='Avatar' width='30' height='30'> | [alexgrate](https://github.com/alexgrate)                 | 6          |
+| 3   | 🥉   | <img src='https://avatars.githubusercontent.com/u/193773700?v=4' alt='Avatar' width='30' height='30'> | [aryadharmadhikari](https://github.com/aryadharmadhikari) | 3          |
+| 4   | 🥉   | <img src='https://avatars.githubusercontent.com/u/101010436?v=4' alt='Avatar' width='30' height='30'> | [MichaelOmoniyi](https://github.com/MichaelOmoniyi)       | 3          |
+| 5   | 4    | <img src='https://avatars.githubusercontent.com/u/73708569?v=4' alt='Avatar' width='30' height='30'>  | [Jonniie](https://github.com/Jonniie)                     | 1          |
+| 6   | 4    | <img src='https://avatars.githubusercontent.com/u/168524066?v=4' alt='Avatar' width='30' height='30'> | [kumaradarsh2](https://github.com/kumaradarsh2)           | 1          |
 
 Thank you to all our fantastic contributors for their hard work and dedication!
 
@@ -113,6 +113,7 @@ Check out the full leaderboard [here](LEADERBOARD.md).
 ## 🌟 **Contributor Recognition**
 
 All merged pull requests will:
+
 - ✅ Count toward **Hacktoberfest completion**
 - 🏆 Be featured on our **contributors leaderboard**
 - 💬 Be highlighted in MLSA Nigeria’s newsletters and social media
