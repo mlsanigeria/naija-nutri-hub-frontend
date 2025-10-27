@@ -1,12 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 
-export default function VerifyResetOtpPage() {
+function VerifyResetOtpContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const email = searchParams.get("email");
@@ -53,16 +53,8 @@ export default function VerifyResetOtpPage() {
   return (
     <main className="flex flex-col items-center justify-center min-h-screen bg-[#222222] px-4">
       <section className="w-full max-w-md text-center">
-        <h2
-          className="text-2xl text-white mb-4"
-          //   style={{ fontFamily: "var(--font-source-serif-pro)" }}
-        >
-          Verify Reset Code
-        </h2>
-        <p
-          className="text-gray-400 mb-6"
-          //   style={{ fontFamily: "var(--font-manrope)" }}
-        >
+        <h2 className="text-2xl text-white mb-4">Verify Reset Code</h2>
+        <p className="text-gray-400 mb-6">
           Enter the 6-digit code sent to your email.
         </p>
 
@@ -72,7 +64,7 @@ export default function VerifyResetOtpPage() {
             onChange={(e) => setOtp(e.target.value)}
             placeholder="Enter OTP"
             maxLength={6}
-            className=" border text-white h-12 text-center tracking-widest"
+            className="border text-white h-12 text-center tracking-widest"
           />
           <Button
             type="submit"
@@ -92,5 +84,15 @@ export default function VerifyResetOtpPage() {
         </div>
       </section>
     </main>
+  );
+}
+
+export default function VerifyResetOtpPage() {
+  return (
+    <Suspense
+      fallback={<div className="text-white text-center mt-10">Loading...</div>}
+    >
+      <VerifyResetOtpContent />
+    </Suspense>
   );
 }
