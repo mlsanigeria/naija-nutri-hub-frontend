@@ -28,6 +28,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { SignupFormSchema } from "@/lib/zod";
 import { FormError } from "@/components/ui/form-error"; // Import the new component
+import { axiosInstance } from "@/lib/axios";
 
 export const SignUpForm = () => {
   const router = useRouter();
@@ -49,19 +50,35 @@ export const SignUpForm = () => {
   async function onSubmit(values: z.infer<typeof SignupFormSchema>) {
     setIsLoading(true);
     setError(null);
-    console.log(values);
 
     try {
-      // --- TODO: Replace with your actual Sign Up API call ---
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      // Map the form values to match the API request body format
+      const requestData = {
+        firstname: values.first_name,
+        lastname: values.last_name,
+        username: values.username,
+        email: values.email,
+        password: values.password,
+      };
+
+      console.log(
+        "Sending request to:",
+        axiosInstance.defaults.baseURL + "/sign-up",
+      );
+      const response = await axiosInstance.post("/sign-up", requestData);
+      console.log("Response:", response.data);
 
       toast.success("Account created successfully! Check your email.");
       router.push(`/verify-account?email=${encodeURIComponent(values.email)}`);
-    } catch (apiError) {
+    } catch (apiError: unknown) {
+      const responseData = (
+        apiError as { response?: { data?: { message?: string } } }
+      )?.response?.data;
       const message =
-        apiError instanceof Error
+        responseData?.message ||
+        (apiError instanceof Error
           ? apiError.message
-          : "An unknown error occurred.";
+          : "An unknown error occurred.");
       setError(message);
       toast.error(message);
     } finally {
