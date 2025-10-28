@@ -63,11 +63,10 @@ export const SignupFormSchema = z
       .max(30, {
         message: "Username cannot exceed 30 characters.",
       })
-      .regex(/^[A-Za-z]/, {
-        message: "Username must start with a letter.",
-      })
+      // This single regex handles both rules (starts with letter, then letters/numbers/underscores)
       .regex(/^[A-Za-z][A-Za-z0-9_]*$/, {
-        message: "Username can contain only letters, numbers and underscores.",
+        message:
+          "Username must start with a letter and can only contain letters, numbers, and underscores.",
       })
       .toLowerCase(),
     email: z

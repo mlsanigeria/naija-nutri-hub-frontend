@@ -1,11 +1,21 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { toast } from "sonner";
+import {
+  LockIcon,
+  User,
+  Loader2,
+  AlertCircle,
+  EyeIcon,
+  EyeOffIcon,
+  MailIcon,
+} from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -14,21 +24,16 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-
 import { SignupFormSchema } from "@/lib/zod";
-import { EyeIcon, EyeOffIcon, MailIcon, User2, Lock, Info } from "lucide-react";
+import { FormError } from "@/components/ui/form-error"; // Import the new component
 
-export const SignupForm = () => {
+export const SignUpForm = () => {
   const router = useRouter();
-
+  const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-
-  const togglePasswordVisibility = () => {
-    setShowPassword((prevState) => !prevState);
-  };
+  const [error, setError] = useState<string | null>(null);
 
   const form = useForm<z.infer<typeof SignupFormSchema>>({
     resolver: zodResolver(SignupFormSchema),
@@ -41,198 +46,254 @@ export const SignupForm = () => {
     },
   });
 
-  function onSubmit(values: z.infer<typeof SignupFormSchema>) {
+  async function onSubmit(values: z.infer<typeof SignupFormSchema>) {
+    setIsLoading(true);
+    setError(null);
     console.log(values);
-    router.push(`/verify-account?email=${values.email}`);
+
+    try {
+      // --- TODO: Replace with your actual Sign Up API call ---
+      await new Promise((resolve) => setTimeout(resolve, 1500));
+
+      toast.success("Account created successfully! Check your email.");
+      router.push(`/verify-account?email=${encodeURIComponent(values.email)}`);
+    } catch (apiError) {
+      const message =
+        apiError instanceof Error
+          ? apiError.message
+          : "An unknown error occurred.";
+      setError(message);
+      toast.error(message);
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   return (
-    <div className="w-full">
+    <div className="flex flex-col items-center text-center space-y-8 w-full max-w-md px-4">
+      {/* 1. Title */}
+      <h1 className="text-3xl sm:text-4xl font-serif pt-8 pb-4 px-4">
+        Create an account to get started
+      </h1>
+
       <Form {...form}>
         <form
-          method="POST"
           onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-6"
+          className="w-full space-y-6"
         >
-          <div className="flex space-x-4">
+          {/* 2. First Name and Last Name Row */}
+          <div className="grid grid-cols-2 gap-4">
             <FormField
               control={form.control}
               name="first_name"
-              render={({ field }) => (
-                <FormItem className="space-y-2">
-                  <FormLabel
-                    htmlFor="first_name"
-                    className="text-foreground text-sm leading-none"
-                    style={{ fontFamily: "var(--font-manrope)" }}
-                  >
-                    First name
-                  </FormLabel>
+              render={({ field, fieldState }) => (
+                <FormItem className="text-left">
+                  <FormLabel htmlFor="first_name">First name</FormLabel>
                   <FormControl>
-                    <Input
-                      id="first_name"
-                      autoComplete="given-name"
-                      placeholder="First name"
-                      className="background border rounded-md h-12 text-input focus:text-foreground placeholder:text-input"
-                      {...field}
-                    />
+                    <div className="relative">
+                      <Input
+                        id="first_name"
+                        placeholder="First name"
+                        className="h-11 placeholder:text-[#9e9e9e] text-xs"
+                        autoComplete="given-name"
+                        {...field}
+                      />
+                    </div>
                   </FormControl>
-                  <FormMessage className="text-destructive" />
+                  <FormError message={fieldState.error?.message} />
                 </FormItem>
               )}
             />
-
             <FormField
               control={form.control}
               name="last_name"
-              render={({ field }) => (
-                <FormItem className="space-y-2">
-                  <FormLabel
-                    htmlFor="last_name"
-                    className="text-foreground text-sm leading-none"
-                    style={{ fontFamily: "var(--font-manrope)" }}
-                  >
-                    Last name
-                  </FormLabel>
+              render={({ field, fieldState }) => (
+                <FormItem className="text-left">
+                  <FormLabel htmlFor="last_name">Last name</FormLabel>
                   <FormControl>
-                    <Input
-                      id="last_name"
-                      autoComplete="family-name"
-                      placeholder="Last name"
-                      className="background border rounded-md h-12 text-input focus:text-foreground placeholder:text-input"
-                      {...field}
-                    />
+                    <div className="relative">
+                      <Input
+                        id="last_name"
+                        placeholder="Last name"
+                        className="h-11 placeholder:text-[#9e9e9e] text-xs"
+                        autoComplete="family-name"
+                        {...field}
+                      />
+                    </div>
                   </FormControl>
-                  <FormMessage className="text-destructive" />
+                  <FormError message={fieldState.error?.message} />
                 </FormItem>
               )}
             />
           </div>
 
+          {/* 3. Username Field */}
           <FormField
             control={form.control}
             name="username"
-            render={({ field }) => (
-              <FormItem className="space-y-2">
-                <FormLabel
-                  htmlFor="username"
-                  className="text-foreground text-sm leading-none"
-                  style={{ fontFamily: "var(--font-manrope)" }}
-                >
-                  Username
-                </FormLabel>
+            render={({ field, fieldState }) => (
+              <FormItem className="text-left">
+                <FormLabel htmlFor="username">Username</FormLabel>
                 <FormControl>
                   <div className="relative">
-                    <User2 className="absolute left-3 top-1/2 -translate-y-1/2 text-input size-5" />
+                    <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#9e9e9e]" />
                     <Input
                       id="username"
-                      autoComplete="username"
                       placeholder="Enter username"
-                      className="background border rounded-md pl-10 h-12 text-input focus:text-foreground placeholder:text-input"
+                      className="h-11 pl-10 placeholder:text-[#9e9e9e] text-xs"
+                      autoComplete="username"
                       {...field}
                     />
                   </div>
                 </FormControl>
-                <FormMessage className="text-destructive" />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem className="space-y-2">
-                <FormLabel
-                  htmlFor="email"
-                  className="text-foreground text-sm leading-none"
-                  style={{ fontFamily: "var(--font-manrope)" }}
-                >
-                  Email
-                </FormLabel>
-                <FormControl>
-                  <div className="relative">
-                    <MailIcon className="absolute left-3 top-1/2 -translate-y-1/2 text-input size-5" />
-                    <Input
-                      id="email"
-                      autoComplete="email"
-                      placeholder="Enter email"
-                      className="background border rounded-md pl-10 h-12 text-input focus:text-foreground placeholder:text-input"
-                      {...field}
-                    />
-                  </div>
-                </FormControl>
-                <FormMessage className="text-destructive" />
+                <FormError message={fieldState.error?.message} />
               </FormItem>
             )}
           />
 
+          {/* 4. Email Field */}
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field, fieldState }) => (
+              <FormItem className="text-left">
+                <FormLabel htmlFor="email">Email</FormLabel>
+                <FormControl>
+                  <div className="relative">
+                    <MailIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#9e9e9e]" />
+                    <Input
+                      id="email"
+                      type="email"
+                      placeholder="Enter email"
+                      className="h-11 pl-10 placeholder:text-[#9e9e9e] text-xs"
+                      autoComplete="email"
+                      {...field}
+                    />
+                  </div>
+                </FormControl>
+                <FormError message={fieldState.error?.message} />
+              </FormItem>
+            )}
+          />
+
+          {/* 5. Password Field */}
           <FormField
             control={form.control}
             name="password"
-            render={({ field }) => (
-              <FormItem className="space-y-2">
-                <FormLabel
-                  htmlFor="password"
-                  className="text-foreground text-sm leading-none"
-                  style={{ fontFamily: "var(--font-manrope)" }}
-                >
-                  Password
-                </FormLabel>
+            render={({ field, fieldState }) => (
+              <FormItem className="text-left">
+                <FormLabel htmlFor="password">Password</FormLabel>
                 <FormControl>
                   <div className="relative">
-                    <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-input size-5" />
+                    <LockIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#9e9e9e]" />
                     <Input
-                      type={showPassword ? "text" : "password"}
-                      aria-describedby="password-constraints"
-                      autoComplete="new-password"
                       id="password"
-                      placeholder="Enter Password"
-                      className="background border rounded-md pl-10 pr-10 h-12 text-input focus:text-foreground placeholder:text-input"
+                      type={showPassword ? "text" : "password"}
+                      placeholder="Enter password"
+                      className="h-11 pl-10 pr-10 placeholder:text-[#9e9e9e] text-xs"
+                      autoComplete="new-password"
                       {...field}
                     />
                     <Button
                       type="button"
-                      id="toggle-password"
-                      aria-label="Show password as plain text. Warning: this will display your password on the screen."
                       variant="ghost"
                       size="icon"
-                      onClick={togglePasswordVisibility}
-                      className="absolute right-2 top-1/2 -translate-y-1/2 text-input hover:bg-transparent"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute right-2 top-1/2 -translate-y-1/2"
+                      aria-label={
+                        showPassword ? "Hide password" : "Show password"
+                      }
                     >
                       {showPassword ? (
-                        <EyeOffIcon aria-hidden="true" className="size-5" />
+                        <EyeIcon className="h-4 w-4 text-[#9e9e9e]" />
                       ) : (
-                        <EyeIcon aria-hidden="true" className="size-5" />
+                        <EyeOffIcon className="h-4 w-4 text-[#9e9e9e]" />
                       )}
-                      <span className="sr-only">
-                        {showPassword ? "Hide" : "Show"} password
-                      </span>
                     </Button>
                   </div>
                 </FormControl>
-                <div className="flex items-center space-x-2 text-muted-foreground text-sm">
-                  <Info className="size-4 text-[#9CA3AF]" />
-                  <span
-                    style={{
-                      fontFamily: "var(--font-manrope)",
-                      fontSize: "12px",
-                    }}
-                    className="text-[#565656]"
-                  >
-                    Must contain 1 uppercase letter, 1 number and a minimum of 8
-                    characters
-                  </span>
+
+                <div className="flex items-start gap-1 text-xs text-[#9e9e9e] mt-2">
+                  <AlertCircle className="h-4 w-3 flex-shrink-0" />
+                  <p>
+                    Must have at least 8 characters, contain an uppercase
+                    letter, a lowercase letter, a number, and a special
+                    character.
+                  </p>
                 </div>
-                <FormMessage className="text-destructive" />
+                <FormError message={fieldState.error?.message} />
               </FormItem>
             )}
           />
+
+          {/* This snippet adds the confirm password button
+                    <FormField
+                        control={form.control}
+                        name="confirm_password"
+                        render={({ field, fieldState }) => (
+                            <FormItem className="text-left">
+                                <FormLabel htmlFor="confirm_password">
+                                    Confirm Password
+                                </FormLabel>
+                                <FormControl>
+                                    <div className="relative">
+                                        <LockIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#9e9e9e]" />
+                                        <Input
+                                            id="confirm_password"
+                                            type={showPassword ? "text" : "password"}
+                                            placeholder="Confirm your password"
+                                            className="h-11 pl-10 pr-10 placeholder:text-[#9e9e9e] text-xs"
+                                            autoComplete="new-password"
+                                            {...field}
+                                        />
+                                        <Button
+                                            type="button"
+                                            variant="ghost"
+                                            size="icon"
+                                            onClick={() => setShowPassword(!showPassword)}
+                                            className="absolute right-2 top-1/2 -translate-y-1/2"
+                                            aria-label={
+                                                showPassword ? "Hide password" : "Show password"
+                                            }
+                                        >
+                                            {showPassword ? (
+                                                <EyeIcon className="h-4 w-4 text-[#9e9e9e]" />
+                                            ) : (
+                                                <EyeOffIcon className="h-4 w-4 text-[#9e9e9e]" />
+                                            )}
+                                        </Button>
+                                    </div>
+                                </FormControl>
+                                <FormError message={fieldState.error?.message} />
+                            </FormItem>
+                        )}
+                    />*/}
+
+          {/* Render API Error Message */}
+          {error && (
+            <div className="flex items-center justify-center gap-2 text-sm text-destructive">
+              <AlertCircle className="h-4 w-4" />
+              <p>{error}</p>
+            </div>
+          )}
+
+          {/* 7. Create Account Button */}
           <Button
             type="submit"
-            className="w-full bg-primary hover:bg-primary/90 text-primary-foreground py-3 rounded-md h-12 font-semibold text-sm leading-none"
-            style={{ fontFamily: "var(--font-source-serif-pro)" }}
+            className="w-full h-11 text-base font-serif"
+            disabled={isLoading}
           >
-            Create account
+            {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+            {isLoading ? "Creating account..." : "Create account"}
           </Button>
+
+          {/* 8. Log In Link */}
+          <p className="text-sm text-center">
+            Already have an account?{" "}
+            <Link href="/login" className="font-bold hover:underline">
+              Log In
+            </Link>
+          </p>
         </form>
       </Form>
     </div>
