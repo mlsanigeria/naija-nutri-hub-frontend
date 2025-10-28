@@ -2,34 +2,21 @@ import { z } from "zod";
 
 export const LoginFormSchema = z
   .object({
-    email: z
+    identifier: z
       .string()
-      .email({
-        message: "Please provide a valid email address.",
+      .min(1, {
+        message: "Email or username is required.",
       })
-      .max(30, {
-        message: "Email cannot exceed 30 characters.",
-      })
-      .toLowerCase(),
+      .max(64, {
+        message: "Email or username cannot exceed 64 characters.",
+      }),
     password: z
       .string()
-      .min(8, {
-        message: "Password must contain at least 8 characters.",
+      .min(1, {
+        message: "Password is required.",
       })
       .max(64, {
         message: "Password cannot exceed 64 characters.",
-      })
-      .regex(/[a-z]/, {
-        message: "Password must contain at least one lowercase letter.",
-      })
-      .regex(/[A-Z]/, {
-        message: "Password must contain at least one uppercase letter.",
-      })
-      .regex(/\d/, {
-        message: "Password must contain at least one digit.",
-      })
-      .regex(/[^A-Za-z0-9]/, {
-        message: "Password must contain at least one special character.",
       }),
   })
   .required();
