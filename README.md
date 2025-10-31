@@ -88,6 +88,7 @@ Watch our info session on how to get started with Hacktoberfest and contribute t
 We maintain a leaderboard to track your contributions and their impact on our projects. The more you contribute, the higher you'll climb on the leaderboard.
 
 <!-- Section Start -->
+
 ### Top 10 Contributors
 
 Thank you to all our fantastic contributors for their hard work and dedication! Here are our top 10 contributors:
