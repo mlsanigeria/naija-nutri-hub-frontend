@@ -2,11 +2,9 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -17,14 +15,14 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-
 import { LoginFormSchema } from "@/lib/zod";
-import { EyeIcon, EyeOffIcon, MailIcon } from "lucide-react";
+import { EyeIcon, EyeOffIcon, User } from "lucide-react";
 import Link from "next/link";
+import { axiosInstance } from "@/lib/axios";
+import { toast } from "sonner";
 
 export function LoginForm() {
   const router = useRouter();
-
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -33,45 +31,110 @@ export function LoginForm() {
   const form = useForm<z.infer<typeof LoginFormSchema>>({
     resolver: zodResolver(LoginFormSchema),
     defaultValues: {
-      email: "",
+      identifier: "",
       password: "",
     },
   });
 
-  // 🧠 Toggle handlers
   const togglePasswordVisibility = () => setShowPassword((prev) => !prev);
   const toggleRememberMe = () => setRememberMe((prev) => !prev);
 
-  // ✅ Correctly handle submission
+  // (removed unused email helper)
+
   const onSubmit = async (values: z.infer<typeof LoginFormSchema>) => {
     setErrorMessage("");
     setLoading(true);
 
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: new URLSearchParams({
-          username: values.email, // or values.username if your form uses that name
-          password: values.password,
-        }),
+      console.log("Form values:", values); // Debug log
+
+      // Backend likely expects OAuth2PasswordRequestForm-style form data
+      const requestBody = {
+        username: String(values.identifier ?? "").trim(),
+        password: String(values.password ?? ""),
+      };
+      const formBody = new URLSearchParams();
+      formBody.append("username", requestBody.username);
+      formBody.append("password", requestBody.password);
+      // Some FastAPI setups require grant_type to be present
+      formBody.append("grant_type", "password");
+
+      console.log("Login request:", {
+        url: axiosInstance.defaults.baseURL + "/login",
+        data: requestBody,
+        sent: "application/x-www-form-urlencoded",
       });
 
-      if (response.ok) {
-        router.push("/image-request");
-        return;
-      } else {
-        const error = await response.json();
-        console.error("Login error:", error);
-        setErrorMessage(
-          error?.detail || "Invalid credentials or unverified account.",
-        );
+      // Send as x-www-form-urlencoded
+      const response = await axiosInstance.post("/login", formBody, {
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      });
+
+      console.log("Login response:", response.data);
+      router.push("/image-request");
+    } catch (apiError: unknown) {
+      console.error("Login error:", {
+        error: apiError,
+        // narrow for axios-like errors
+        response: (apiError as { response?: { data?: unknown } })?.response
+          ?.data,
+      });
+      console.error(
+        "API Error:",
+        (apiError as { response?: { data?: unknown } })?.response?.data,
+      );
+      const data = (apiError as { response?: { data?: unknown } })?.response
+        ?.data as
+        | {
+            message?: string;
+            detail?: Array<{ msg?: string }>;
+            errors?: Record<string, unknown>;
+          }
+        | string
+        | undefined;
+      let message: string | undefined;
+      if (typeof data === "string") {
+        message = data;
+      } else if (data && typeof data === "object") {
+        const obj = data as {
+          message?: string;
+          detail?: Array<{ msg?: string }>;
+          errors?: Record<string, unknown>;
+        };
+        message = obj.message;
+        // FastAPI / Pydantic-style errors: { detail: [{ loc: ['body','field'], msg: '...', type: '...' }, ...] }
+        if (!message && Array.isArray(obj.detail)) {
+          try {
+            const detailMsgs = obj.detail
+              .map((d) => d?.msg)
+              .filter(Boolean) as string[];
+            if (detailMsgs.length > 0) message = detailMsgs.join(" \n");
+          } catch {
+            // ignore parsing error
+          }
+        }
+        if (!message && obj.errors) {
+          try {
+            const aggregated = Object.values(
+              obj.errors as Record<string, unknown>,
+            )
+              .flat()
+              .filter(Boolean)
+              .map((v) => String(v))
+              .join(" ");
+            if (aggregated) message = aggregated;
+          } catch {
+            // ignore parsing error
+          }
+        }
       }
-    } catch (error) {
-      console.error("Network error:", error);
-      setErrorMessage("Network error. Please try again.");
+      if (!message)
+        message =
+          apiError instanceof Error
+            ? apiError.message
+            : "An unknown error occurred";
+      setErrorMessage(message);
+      toast.error(message);
     } finally {
       setLoading(false);
     }
@@ -80,31 +143,23 @@ export function LoginForm() {
   return (
     <div className="w-full">
       <Form {...form}>
-        <form
-          method="POST"
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-6"
-        >
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           <FormField
             control={form.control}
-            name="email"
+            name="identifier"
             render={({ field }) => (
               <FormItem className="space-y-2">
                 <FormLabel
                   className="text-white text-sm leading-none"
                   style={{ fontFamily: "var(--font-manrope)" }}
                 >
-                  Email
+                  Email or Username
                 </FormLabel>
                 <FormControl>
                   <div className="relative">
-                    <img
-                      src="/icons/mail-01.png"
-                      alt="mail"
-                      className="absolute left-3 top-1/2 -translate-y-1/2 size-5"
-                    />
+                    <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#9e9e9e]" />
                     <Input
-                      placeholder="Enter email"
+                      placeholder="Enter email or username"
                       className="bg-[#222222] border border-[#444444] rounded-md pl-10 h-12 text-white"
                       {...field}
                     />
@@ -213,12 +268,19 @@ export function LoginForm() {
             </Link>
           </div>
 
+          {errorMessage && (
+            <div className="text-center text-red-500 text-sm">
+              {errorMessage}
+            </div>
+          )}
+
           <Button
             type="submit"
             className="w-full bg-[#FF7A50] hover:bg-[#FF7A50]/90 text-white py-3 rounded-md h-12 font-semibold text-sm leading-none"
             style={{ fontFamily: "var(--font-source-serif-pro)" }}
+            disabled={loading}
           >
-            Log In
+            {loading ? "Logging in..." : "Log In"}
           </Button>
         </form>
       </Form>
