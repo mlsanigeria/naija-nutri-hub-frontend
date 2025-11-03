@@ -46,8 +46,6 @@ export function LoginForm() {
     setLoading(true);
 
     try {
-      console.log("Form values:", values); // Debug log
-
       // Backend likely expects OAuth2PasswordRequestForm-style form data
       const requestBody = {
         username: String(values.identifier ?? "").trim(),
@@ -59,18 +57,11 @@ export function LoginForm() {
       // Some FastAPI setups require grant_type to be present
       formBody.append("grant_type", "password");
 
-      console.log("Login request:", {
-        url: axiosInstance.defaults.baseURL + "/login",
-        data: requestBody,
-        sent: "application/x-www-form-urlencoded",
-      });
-
       // Send as x-www-form-urlencoded
       const response = await axiosInstance.post("/login", formBody, {
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
       });
 
-      console.log("Login response:", response.data);
       router.push("/image-request");
     } catch (apiError: unknown) {
       console.error("Login error:", {

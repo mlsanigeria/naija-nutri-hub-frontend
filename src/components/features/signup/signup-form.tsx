@@ -61,12 +61,7 @@ export const SignUpForm = () => {
         password: values.password,
       };
 
-      console.log(
-        "Sending request to:",
-        axiosInstance.defaults.baseURL + "/sign-up",
-      );
       const response = await axiosInstance.post("/sign-up", requestData);
-      console.log("Response:", response.data);
 
       toast.success("Account created successfully! Check your email.");
       router.push(`/verify-account?email=${encodeURIComponent(values.email)}`);
