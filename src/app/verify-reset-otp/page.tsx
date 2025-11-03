@@ -9,7 +9,7 @@ import { toast } from "sonner";
 function VerifyResetOtpContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const email = searchParams.get("email");
+  const email = searchParams.get("email") || localStorage.getItem("resetEmail");
 
   const [otp, setOtp] = useState("");
   const [loading, setLoading] = useState(false);
@@ -17,8 +17,15 @@ function VerifyResetOtpContent() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (otp.trim().length < 6) {
-      toast.error("Please enter a valid 6-digit code");
+    if (!/^\d{6}$/.test(otp)) {
+      toast.error("Please enter a valid 6-digit numeric code");
+      return;
+    }
+
+    if (!email) {
+      toast.error(
+        "Email not found. Please restart the password reset process.",
+      );
       return;
     }
 
@@ -37,10 +44,16 @@ function VerifyResetOtpContent() {
       const data = await response.json();
 
       if (response.ok) {
+        localStorage.setItem("resetEmail", email);
         toast.success("OTP verified successfully!");
-        router.push(`/new-password?email=${encodeURIComponent(email || "")}`);
+        router.push(`/new-password?email=${encodeURIComponent(email)}`);
       } else {
-        toast.error(data.detail || "Invalid or expired OTP");
+        const errorMsg = Array.isArray(data.detail)
+          ? data.detail[0]?.msg
+          : typeof data.detail === "string"
+            ? data.detail
+            : "Invalid or expired OTP";
+        toast.error(errorMsg);
       }
     } catch (error) {
       console.error(error);
@@ -64,7 +77,8 @@ function VerifyResetOtpContent() {
             onChange={(e) => setOtp(e.target.value)}
             placeholder="Enter OTP"
             maxLength={6}
-            className="border text-white h-12 text-center tracking-widest"
+            disabled={loading}
+            className="border text-white h-12 text-center tracking-widest disabled:opacity-50"
           />
           <Button
             type="submit"
@@ -78,7 +92,7 @@ function VerifyResetOtpContent() {
 
         <div className="mt-4 text-sm text-gray-400">
           Didn’t get a code?{" "}
-          <a href="/reset-password" className="text-[#FF7A50] font-semibold">
+          <a href="/forgot-password" className="text-[#FF7A50] font-semibold">
             Resend
           </a>
         </div>
