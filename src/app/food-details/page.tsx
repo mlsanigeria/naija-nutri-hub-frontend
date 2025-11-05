@@ -1,184 +1,167 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
+import Link from "next/link";
 
-const Nutritional = () => (
-  <>
-    <p className="border-b border-[#565656] py-4 transition-all duration-300">
-      <strong className="font-semibold">Total fat</strong>{" "}
-      <span
-        className="float-right font-normal"
-        style={{ fontFamily: "var(--font-manrope)" }}
-      >
-        30g
-      </span>
-    </p>
-    <p className="border-b border-[#565656] py-4 transition-all duration-300">
-      <strong className="font-semibold">Total fat</strong>{" "}
-      <span
-        className="float-right font-normal"
-        style={{ fontFamily: "var(--font-manrope)" }}
-      >
-        30g
-      </span>
-    </p>
-    <p className="border-b border-[#565656] py-4 transition-all duration-300">
-      <strong className="font-semibold">Total fat</strong>{" "}
-      <span
-        className="float-right font-normal"
-        style={{ fontFamily: "var(--font-manrope)" }}
-      >
-        30g
-      </span>
-    </p>
-  </>
-);
-
-const Recipe = () => (
-  <p className="py-2 transition-all duration-300">Loading...</p>
-);
-
-const Restaurants = () => (
-  <p className="py-2 transition-all duration-300">Loading...</p>
-);
-
-export default function Page() {
+export default function FoodDetailsPage() {
   const [activeTab, setActiveTab] = useState("nutritional");
+  const [ingredientsExpanded, setIngredientsExpanded] = useState(false);
+  const [ingredientsHeight, setIngredientsHeight] = useState(0);
+  const ingredientsRef = useRef<HTMLDivElement>(null);
 
-  const renderContent = () => {
-    switch (activeTab) {
-      case "nutritional":
-        return <Nutritional />;
-      case "recipe":
-        return <Recipe />;
-      case "restaurants":
-        return <Restaurants />;
-      default:
-        return null;
+  // Calculate height for smooth animation
+  useEffect(() => {
+    if (ingredientsRef.current) {
+      setIngredientsHeight(
+        ingredientsExpanded ? ingredientsRef.current.scrollHeight : 0,
+      );
     }
-  };
+  }, [ingredientsExpanded]);
 
   return (
-    <main className="min-h-screen background text-foreground flex justify-center items-start">
-      <div className="w-full max-w-md bg-[#1a1a1a] shadow-lg relative">
-        <div className="absolute top-0 left-0 w-full h-80">
+    <main className="min-h-screen bg-[#1a1a1a] text-foreground flex justify-center items-start">
+      <div className="w-full max-w-md bg-[#1a1a1a] shadow-lg relative mt-8">
+        {/* Background Image */}
+        <div className="relative h-80 w-full">
           <Image
-            src="/images/bgimage.png"
-            alt="Matcha Pancake"
+            src="/images/bgimage.png" // Replace with actual Jollof rice image
+            alt="Jollof Rice"
             fill
             priority
-            sizes="(max-width: 768px) 100vw, 33vw"
             className="object-cover"
           />
         </div>
 
-        <div className="relative z-10 flex flex-col items-center pt-64">
-          <div className="bg-[#282828] bg-opacity-90 rounded-t-4xl p-6 max-w-md shadow-lg w-full">
-            <div className="flex items-center justify-center mb-6">
-              <span className="w-12 h-1 bg-[#565656] rounded-md"></span>
-            </div>
-            <h1
-              className="text-[#9E9E9E] text-lg text-left font-medium mb-2"
-              style={{ fontFamily: "var(--font-manrope)" }}
-            >
-              Matcha Pancake
+        {/* Content Card */}
+        <div className="relative -top-6 bg-[#282828] rounded-t-3xl pt-6 px-6 pb-8">
+          {/* Drag Handle */}
+          <div className="flex justify-center mb-4">
+            <div className="w-12 h-1 bg-[#565656] rounded-full"></div>
+          </div>
+
+          {/* Food Title and Description */}
+          <div className="mb-6">
+            <h1 className="text-2xl font-semibold text-[#EAEAEA] mb-2">
+              Jollof rice
             </h1>
-            <p
-              className="text-2xl font-normal text-[#EAEAEA] mb-4"
-              style={{ fontFamily: "var(--font-manrope)" }}
-            >
-              This Healthy Matcha pancake is the universal delight of matcha
-              breakfast.{" "}
-              <span className="text-[#565656] text-base">View More</span>
+            <p className="text-[#9E9E9E] text-base leading-relaxed">
+              A flavorful and iconic Nigerian dish made with long-grain rice
+              simmered in a rich tomato and pepper-based sauce...{" "}
+              <span className="text-[#565656] cursor-pointer">View More</span>
             </p>
+          </div>
 
-            <div
-              className="grid grid-cols-2  gap-4 text-sm mb-4"
-              style={{ fontFamily: "var(--font-manrope)" }}
+          {/* Food Attributes Grid */}
+          <div className="grid grid-cols-2 gap-4 mb-6">
+            <div className="flex items-center space-x-3 bg-[#FFEDE7] p-3 rounded-xl">
+              <img
+                src="/icons/maps-global-01.png"
+                alt="Food Origin"
+                className="w-8 h-8 object-contain"
+              />
+              <div className="space-y-1">
+                <h3 className="text-[#FC865C] text-sm font-medium">
+                  Food Origin
+                </h3>
+                <p className="text-[#FC865C] text-base">Western</p>
+              </div>
+            </div>
+
+            <div className="flex items-center space-x-3 bg-[#FFEDE7] p-3 rounded-xl">
+              <img
+                src="/icons/pepicons-print_fire.png"
+                alt="Spice Level"
+                className="w-8 h-8 object-contain"
+              />
+              <div className="space-y-1">
+                <h3 className="text-[#FC865C] text-sm font-medium">
+                  Spice Level
+                </h3>
+                <p className="text-[#FC865C] text-base">Spicy</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Main Ingredients - Animated Collapsible Section */}
+          <div className="mb-6">
+            <button
+              className="flex items-center justify-between w-full text-left mb-2"
+              onClick={() => setIngredientsExpanded(!ingredientsExpanded)}
             >
-              <div className="flex items-center space-x-2">
-                <div className="bg-[#FFEDE7] w-10 h-10 rounded-md flex items-center justify-center">
-                  <Image
-                    src="/icons/calorie-icon.png"
-                    alt="Calories"
-                    width={16.84}
-                    height={20.96}
-                    sizes="50px"
-                  />
-                </div>
-                <span className="text-base">120 Calories</span>
-              </div>
+              <h3 className="text-[#EAEAEA] text-lg font-semibold">
+                Main Ingredients
+              </h3>
+              <svg
+                className={`w-5 h-5 text-[#9E9E9E] transition-transform duration-300 ${
+                  ingredientsExpanded ? "rotate-180" : ""
+                }`}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </button>
 
-              <div className="flex items-center space-x-2">
-                <div className="bg-[#FFEDE7] w-10 h-10 rounded-md flex items-center justify-center">
-                  <Image
-                    src="/icons/fats-icon.png"
-                    alt="Fats"
-                    width={16.84}
-                    height={20.96}
-                    sizes="50px"
-                  />
-                </div>
-                <span className="text-base">91g Fats</span>
-              </div>
-
-              <div className="flex items-center space-x-2">
-                <div className="bg-[#FFEDE7] w-10 h-10 rounded-md flex items-center justify-center">
-                  <Image
-                    src="/icons/carbs-icon.png"
-                    alt="Carbs"
-                    width={16.84}
-                    height={20.96}
-                    sizes="50px"
-                  />
-                </div>
-                <span className="text-base">65g Carbs</span>
-              </div>
-
-              <div className="flex items-center space-x-2">
-                <div className="bg-[#FFEDE7] w-10 h-10 rounded-md flex items-center justify-center">
-                  <Image
-                    src="/icons/protein-icon.png"
-                    alt="Calories"
-                    width={16.84}
-                    height={20.96}
-                    sizes="50px"
-                  />
-                </div>
-                <span className="text-base">27g Proteins</span>
+            {/* Animated dropdown content */}
+            <div
+              className="overflow-hidden transition-all duration-300 ease-in-out"
+              style={{ height: `${ingredientsHeight}px` }}
+            >
+              <div ref={ingredientsRef} className="pl-2">
+                <ul className="text-[#9E9E9E] space-y-2">
+                  <li className="flex items-center transition-all duration-200 hover:text-[#EAEAEA]">
+                    <span className="w-1.5 h-1.5 bg-[#565656] rounded-full mr-3"></span>
+                    Tomatoes
+                  </li>
+                  <li className="flex items-center transition-all duration-200 hover:text-[#EAEAEA]">
+                    <span className="w-1.5 h-1.5 bg-[#565656] rounded-full mr-3"></span>
+                    Bell Peppers
+                  </li>
+                  <li className="flex items-center transition-all duration-200 hover:text-[#EAEAEA]">
+                    <span className="w-1.5 h-1.5 bg-[#565656] rounded-full mr-3"></span>
+                    Rice
+                  </li>
+                  <li className="flex items-center transition-all duration-200 hover:text-[#EAEAEA]">
+                    <span className="w-1.5 h-1.5 bg-[#565656] rounded-full mr-3"></span>
+                    Oil
+                  </li>
+                  <li className="flex items-center transition-all duration-200 hover:text-[#EAEAEA]">
+                    <span className="w-1.5 h-1.5 bg-[#565656] rounded-full mr-3"></span>
+                    Salt/ Seasoning
+                  </li>
+                </ul>
               </div>
             </div>
+          </div>
 
-            <div className="bg-[#2C2C2C] p-1 rounded-md">
-              <div className="flex flex-col sm:flex-row justify-around text-sm">
-                <button
-                  className={`p-4 rounded-md text-sm border-b-2 ${activeTab == "nutritional" ? "bg-[#EAEAEA] text-black" : "bg-[#2C2C2C]"}`}
-                  onClick={() => setActiveTab("nutritional")}
-                  style={{ fontFamily: "var(--font-source-serif-pro)" }}
-                >
-                  Nutritional Value
-                </button>
+          <div className="flex flex-col items-center gap-4 w-full pb-6 rounded-xl">
+            <Link
+              href="/nutritional-value"
+              className="w-full py-2 rounded-xl text-md font-medium bg-[#FF7643] text-black shadow-md hover:scale-[1.02] transition-all duration-200 text-center"
+            >
+              Nutritional value
+            </Link>
 
-                <button
-                  className={`p-4 rounded-md text-sm border-b-2 ${activeTab == "recipe" ? "bg-[#EAEAEA] text-black" : "bg-[#2C2C2C]"}`}
-                  onClick={() => setActiveTab("recipe")}
-                  style={{ fontFamily: "var(--font-source-serif-pro)" }}
-                >
-                  Recipe
-                </button>
+            <Link
+              href="/recipe"
+              className="w-full py-2 rounded-xl text-md font-medium bg-[#FF7643] text-black shadow-md hover:scale-[1.02] transition-all duration-200 text-center"
+            >
+              Recipe
+            </Link>
 
-                <button
-                  className={`p-4 rounded-md text-sm border-b-2 ${activeTab == "restaurants" ? "bg-[#EAEAEA] text-black" : "bg-[#2C2C2C]"}`}
-                  onClick={() => setActiveTab("restaurants")}
-                  style={{ fontFamily: "var(--font-source-serif-pro)" }}
-                >
-                  Restaurant
-                </button>
-              </div>
-            </div>
-
-            <div className="mt-4 p-4">{renderContent()}</div>
+            <Link
+              href="/food-location"
+              className="w-full py-2 rounded-xl text-md font-medium bg-[#FF7643] text-black shadow-md hover:scale-[1.02] transition-all duration-200 text-center"
+            >
+              Food Location
+            </Link>
           </div>
         </div>
       </div>
