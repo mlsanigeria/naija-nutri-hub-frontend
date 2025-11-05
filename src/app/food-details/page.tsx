@@ -25,7 +25,7 @@ export default function FoodDetailsPage() {
         {/* Background Image */}
         <div className="relative h-80 w-full">
           <Image
-            src="/images/bgimage.png" // Replace with actual Jollof rice image
+            src="/images/Jollof-rice.png"
             alt="Jollof Rice"
             fill
             priority
@@ -144,21 +144,21 @@ export default function FoodDetailsPage() {
           <div className="flex flex-col items-center gap-4 w-full pb-6 rounded-xl">
             <Link
               href="/nutritional-value"
-              className="w-full py-2 rounded-xl text-md font-medium bg-[#FF7643] text-black shadow-md hover:scale-[1.02] transition-all duration-200 text-center"
+              className="w-full py-2 rounded-xl text-md font-medium text-black bg-[#FB6E3D] shadow-[0_3px_0_#FDAC8F] hover:scale-[1.02] active:translate-y-[2px] transition-all duration-200 text-center"
             >
               Nutritional value
             </Link>
 
             <Link
               href="/recipe"
-              className="w-full py-2 rounded-xl text-md font-medium bg-[#FF7643] text-black shadow-md hover:scale-[1.02] transition-all duration-200 text-center"
+              className="w-full py-2 rounded-xl text-md font-medium text-black bg-[#FB6E3D] shadow-[0_3px_0_#FDAC8F] hover:scale-[1.02] active:translate-y-[2px] transition-all duration-200 text-center"
             >
               Recipe
             </Link>
 
             <Link
               href="/food-location"
-              className="w-full py-2 rounded-xl text-md font-medium bg-[#FF7643] text-black shadow-md hover:scale-[1.02] transition-all duration-200 text-center"
+              className="w-full py-2 rounded-xl text-md font-medium text-black bg-[#FB6E3D] shadow-[0_3px_0_#FDAC8F] hover:scale-[1.02] active:translate-y-[2px] transition-all duration-200 text-center"
             >
               Food Location
             </Link>
