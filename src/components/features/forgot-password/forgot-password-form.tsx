@@ -3,7 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import { z } from "zod";
+import { email, z } from "zod";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -34,20 +34,19 @@ export const ForgotPasswordForm = () => {
   async function onSubmit(data: z.infer<typeof ForgotPasswordFormSchema>) {
     setIsLoading(true);
     try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/reset-password`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email: data.email }),
-        },
-      );
+      const url = `${process.env.NEXT_PUBLIC_API_URL}/resend_otp?email=${encodeURIComponent(data.email)}`;
+      const response = await fetch(url, { method: "POST" });
+
+      console.log("Endpoint:", url);
+      console.log("Response:", response);
 
       if (response.ok) {
         toast.success("Password reset link sent! Please check your email.");
-        // Optionally store the email for the next step
-        //localStorage.setItem("resetEmail", data.email);
-        router.push("/verify-reset-otp");
+        localStorage.setItem("resetEmail", data.email);
+        router.push(
+          `/verify-reset-otp?email=${encodeURIComponent(data.email)}`,
+        );
+        // router.push("/verify-reset-otp");
       } else {
         const errorData = await response.json();
         toast.error(
