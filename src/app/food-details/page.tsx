@@ -143,21 +143,21 @@ export default function FoodDetailsPage() {
 
           <div className="flex flex-col items-center gap-4 w-full pb-6 rounded-xl">
             <Link
-              href="/nutritional-value"
+              href="#"
               className="w-full py-2 rounded-xl text-md font-medium text-black bg-[#FB6E3D] shadow-[0_3px_0_#FDAC8F] hover:scale-[1.02] active:translate-y-[2px] transition-all duration-200 text-center"
             >
               Nutritional value
             </Link>
 
             <Link
-              href="/recipe"
+              href="#"
               className="w-full py-2 rounded-xl text-md font-medium text-black bg-[#FB6E3D] shadow-[0_3px_0_#FDAC8F] hover:scale-[1.02] active:translate-y-[2px] transition-all duration-200 text-center"
             >
               Recipe
             </Link>
 
             <Link
-              href="/food-location"
+              href="#"
               className="w-full py-2 rounded-xl text-md font-medium text-black bg-[#FB6E3D] shadow-[0_3px_0_#FDAC8F] hover:scale-[1.02] active:translate-y-[2px] transition-all duration-200 text-center"
             >
               Food Location
