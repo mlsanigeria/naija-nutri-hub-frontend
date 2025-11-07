@@ -6,26 +6,29 @@ import Link from "next/link";
 
 export default function ScanImagePage() {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [isStarted, setIsStarted] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    const startCamera = async () => {
-      try {
-        const stream = await navigator.mediaDevices.getUserMedia({
-          video: { facingMode: "environment" },
-        });
-        if (videoRef.current) {
-          videoRef.current.srcObject = stream;
-          setLoading(false);
-        }
-      } catch (err) {
-        console.error("Camera access error:", err);
-        setError("Unable to access camera. Please allow camera permissions.");
+  const startCamera = async () => {
+    try {
+      setLoading(true);
+      setIsStarted(true);
+      const stream = await navigator.mediaDevices.getUserMedia({
+        video: { facingMode: "environment" },
+      });
+      if (videoRef.current) {
+        videoRef.current.srcObject = stream;
         setLoading(false);
       }
-    };
+    } catch (err) {
+      console.error("Camera access error:", err);
+      setError("Unable to access camera. Please allow camera permissions.");
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
     startCamera();
 
     return () => {
@@ -60,16 +63,24 @@ export default function ScanImagePage() {
         {error ? (
           <p className="text-center text-sm text-red-400 px-4">{error}</p>
         ) : loading ? (
-          <p className="text-neutral-500 text-sm">Initializing camera...</p>
+          <p className="w-full text-center text-neutral-500 text-sm">
+            Initializing camera...
+          </p>
         ) : (
-          <video
-            ref={videoRef}
-            autoPlay
-            playsInline
-            muted
-            className="w-full h-full object-cover"
-          />
+          ""
         )}
+
+        <video
+          ref={videoRef}
+          autoPlay
+          playsInline
+          muted
+          className={
+            isStarted && !loading
+              ? "w-full h-full object-cover"
+              : "absolute invisible left-[-100vw]"
+          }
+        />
       </div>
 
       {/* Footer */}
