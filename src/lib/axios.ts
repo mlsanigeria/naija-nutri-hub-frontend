@@ -2,7 +2,8 @@ import axios from "axios";
 
 export const axiosInstance = axios.create({
   baseURL: "https://naija-nutri-hub.azurewebsites.net",
-  headers: { "Content-Type": "application/json" },
+  // Removed default Content-Type header to allow Axios to automatically set it
+  // based on the request data (e.g., 'multipart/form-data' for FormData, 'application/json' for objects).
 });
 
 // Add request interceptor for debugging
