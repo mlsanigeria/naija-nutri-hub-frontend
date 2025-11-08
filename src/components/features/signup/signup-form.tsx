@@ -29,6 +29,8 @@ import { Input } from "@/components/ui/input";
 import { SignupFormSchema } from "@/lib/zod";
 import { FormError } from "@/components/ui/form-error"; // Import the new component
 import { axiosInstance } from "@/lib/axios";
+import { ErrorDetailField } from "@/lib/types";
+import { parseErrorMessage } from "@/lib/utils";
 
 export const SignUpForm = () => {
   const router = useRouter();
@@ -61,19 +63,17 @@ export const SignUpForm = () => {
         password: values.password,
       };
 
-      const response = await axiosInstance.post("/sign-up", requestData);
+      await axiosInstance.post("/sign-up", requestData);
 
       toast.success("Account created successfully! Check your email.");
       router.push(`/verify-account?email=${encodeURIComponent(values.email)}`);
     } catch (apiError: unknown) {
-      const responseData = (
-        apiError as { response?: { data?: { message?: string } } }
-      )?.response?.data;
-      const message =
-        responseData?.message ||
-        (apiError instanceof Error
-          ? apiError.message
-          : "An unknown error occurred.");
+      const responseDetail = (
+        apiError as { response?: { data?: { detail?: ErrorDetailField } } }
+      )?.response?.data?.detail;
+
+      const message = parseErrorMessage(responseDetail);
+
       setError(message);
       toast.error(message);
     } finally {
