@@ -79,7 +79,7 @@ function VerifyResetOtpContent() {
 
   return (
     <main className="flex flex-col items-center justify-center min-h-screen bg-[#1E1E1E] px-4">
-      <section className="w-full max-w-md text-center">
+      <section className="w-full max-w-sm text-center">
         {/* Header */}
         <h2
           className="text-3xl text-white font-semibold mb-3"
