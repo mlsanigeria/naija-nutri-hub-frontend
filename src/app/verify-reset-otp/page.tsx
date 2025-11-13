@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useState } from "react";
+import { Suspense, useState, useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -11,13 +11,27 @@ function VerifyResetOtpContent() {
   const searchParams = useSearchParams();
   const email = searchParams.get("email") || localStorage.getItem("resetEmail");
 
-  const [otp, setOtp] = useState("");
+  const [otp, setOtp] = useState(Array(6).fill(""));
   const [loading, setLoading] = useState(false);
+  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+
+  const handleChange = (value: string, index: number) => {
+    if (/^[0-9]?$/.test(value)) {
+      const newOtp = [...otp];
+      newOtp[index] = value;
+      setOtp(newOtp);
+
+      if (value && index < otp.length - 1) {
+        inputRefs.current[index + 1]?.focus();
+      }
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    const otpCode = otp.join("");
 
-    if (!/^\d{6}$/.test(otp)) {
+    if (!/^\d{6}$/.test(otpCode)) {
       toast.error("Please enter a valid 6-digit numeric code");
       return;
     }
@@ -37,7 +51,7 @@ function VerifyResetOtpContent() {
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email, otp }),
+          body: JSON.stringify({ email, otp: otpCode }),
         },
       );
 
@@ -64,38 +78,60 @@ function VerifyResetOtpContent() {
   };
 
   return (
-    <main className="flex flex-col items-center justify-center min-h-screen bg-[#222222] px-4">
-      <section className="w-full max-w-md text-center">
-        <h2 className="text-2xl text-white mb-4">Verify Reset Code</h2>
-        <p className="text-gray-400 mb-6">
-          Enter the 6-digit code sent to your email.
+    <main className="flex flex-col items-center justify-center min-h-screen bg-[#1E1E1E] px-4">
+      <section className="w-full max-w-sm text-center">
+        {/* Header */}
+        <h2
+          className="text-3xl text-white font-semibold mb-3"
+          style={{ fontFamily: "var(--font-source-serif-pro)" }}
+        >
+          We sent you a mail
+        </h2>
+
+        {/* Mail Icon */}
+        <div className="flex justify-center mb-6">
+          <img src="icons/mail-02.png" alt="mail" className="h-14" />
+        </div>
+
+        {/* Instruction Text */}
+        <p className="text-gray-300 mb-8 text-sm leading-relaxed">
+          Enter the one time password (OTP) we sent to
+          <span className="block text-gray-400 font-medium mt-1">
+            ********{email?.slice(-7)}
+          </span>
         </p>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <Input
-            value={otp}
-            onChange={(e) => setOtp(e.target.value)}
-            placeholder="Enter OTP"
-            maxLength={6}
-            disabled={loading}
-            className="border text-white h-12 text-center tracking-widest disabled:opacity-50"
-          />
+        {/* OTP Form */}
+        <form onSubmit={handleSubmit}>
+          <div className="flex justify-between mb-3">
+            {otp.map((digit, index) => (
+              <Input
+                key={index}
+                ref={(el) => {
+                  inputRefs.current[index] = el;
+                }}
+                value={digit}
+                onChange={(e) => handleChange(e.target.value, index)}
+                maxLength={1}
+                disabled={loading}
+                className="w-14 h-14 text-center text-white text-lg bg-transparent border border-gray-600 rounded-sm focus:border-[#FC865C] focus:ring-0"
+              />
+            ))}
+          </div>
+
+          <p className="text-gray-400 text-md mb-6 text-start">
+            <a href="/forgot-password">Resend code by Email</a>
+          </p>
+
           <Button
             type="submit"
             disabled={loading}
-            className="w-full py-3 h-12 hover:bg-[#FF7A50]/90 text-white rounded-md text-sm leading-none"
+            className="w-full bg-[#FC865C] hover:bg-[#FC865C]/90 text-white py-7 rounded-md font-semibold text-base"
             style={{ fontFamily: "var(--font-source-serif-pro)" }}
           >
-            {loading ? "Verifying..." : "Verify Code"}
+            {loading ? "Verifying..." : "Verify"}
           </Button>
         </form>
-
-        <div className="mt-4 text-sm text-gray-400">
-          Didn’t get a code?{" "}
-          <a href="/forgot-password" className="text-[#FF7A50] font-semibold">
-            Resend
-          </a>
-        </div>
       </section>
     </main>
   );
@@ -107,6 +143,6 @@ export default function VerifyResetOtpPage() {
       fallback={<div className="text-white text-center mt-10">Loading...</div>}
     >
       <VerifyResetOtpContent />
-    </Suspense>
+    </Suspense> 
   );
 }
