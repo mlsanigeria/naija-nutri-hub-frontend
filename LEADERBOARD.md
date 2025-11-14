@@ -1,4 +1,3 @@
-
 # GitHub Leaderboard
 
 🏆 **Welcome to the Official Leaderboard!** 🏆
@@ -19,5 +18,4 @@ A heartfelt **thank you** to all our fantastic contributors for their hard work 
 
 ---
 
-*Want to see your name on the leaderboard? Contribute to our project on [GitHub](https://github.com/mlsanigeria/speak-to-docs) and make an impact!*
-
+_Want to see your name on the leaderboard? Contribute to our project on [GitHub](https://github.com/mlsanigeria/speak-to-docs) and make an impact!_

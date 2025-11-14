@@ -18,8 +18,11 @@ import { Input } from "@/components/ui/input";
 import { LoginFormSchema } from "@/lib/zod";
 import { EyeIcon, EyeOffIcon, User } from "lucide-react";
 import Link from "next/link";
-import { axiosInstance } from "@/lib/axios";
 import { toast } from "sonner";
+
+import { axiosInstance } from "@/lib/axios";
+import { parseErrorMessage } from "@/lib/utils";
+import { ErrorDetailField } from "@/lib/types";
 
 export function LoginForm() {
   const router = useRouter();
@@ -58,72 +61,18 @@ export function LoginForm() {
       formBody.append("grant_type", "password");
 
       // Send as x-www-form-urlencoded
-      const response = await axiosInstance.post("/login", formBody, {
+      await axiosInstance.post("/login", formBody, {
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
       });
 
       router.push("/image-request");
     } catch (apiError: unknown) {
-      console.error("Login error:", {
-        error: apiError,
-        // narrow for axios-like errors
-        response: (apiError as { response?: { data?: unknown } })?.response
-          ?.data,
-      });
-      console.error(
-        "API Error:",
-        (apiError as { response?: { data?: unknown } })?.response?.data,
-      );
-      const data = (apiError as { response?: { data?: unknown } })?.response
-        ?.data as
-        | {
-            message?: string;
-            detail?: Array<{ msg?: string }>;
-            errors?: Record<string, unknown>;
-          }
-        | string
-        | undefined;
-      let message: string | undefined;
-      if (typeof data === "string") {
-        message = data;
-      } else if (data && typeof data === "object") {
-        const obj = data as {
-          message?: string;
-          detail?: Array<{ msg?: string }>;
-          errors?: Record<string, unknown>;
-        };
-        message = obj.message;
-        // FastAPI / Pydantic-style errors: { detail: [{ loc: ['body','field'], msg: '...', type: '...' }, ...] }
-        if (!message && Array.isArray(obj.detail)) {
-          try {
-            const detailMsgs = obj.detail
-              .map((d) => d?.msg)
-              .filter(Boolean) as string[];
-            if (detailMsgs.length > 0) message = detailMsgs.join(" \n");
-          } catch {
-            // ignore parsing error
-          }
-        }
-        if (!message && obj.errors) {
-          try {
-            const aggregated = Object.values(
-              obj.errors as Record<string, unknown>,
-            )
-              .flat()
-              .filter(Boolean)
-              .map((v) => String(v))
-              .join(" ");
-            if (aggregated) message = aggregated;
-          } catch {
-            // ignore parsing error
-          }
-        }
-      }
-      if (!message)
-        message =
-          apiError instanceof Error
-            ? apiError.message
-            : "An unknown error occurred";
+      const responseDetail = (
+        apiError as { response?: { data?: { detail?: ErrorDetailField } } }
+      )?.response?.data?.detail;
+
+      const message = parseErrorMessage(responseDetail);
+
       setErrorMessage(message);
       toast.error(message);
     } finally {

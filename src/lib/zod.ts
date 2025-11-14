@@ -15,8 +15,8 @@ export const LoginFormSchema = z
       .min(1, {
         message: "Password is required.",
       })
-      .max(64, {
-        message: "Password cannot exceed 64 characters.",
+      .max(20, {
+        message: "Password cannot exceed 20 characters.",
       }),
   })
   .required();
@@ -31,7 +31,11 @@ export const SignupFormSchema = z
       })
       .max(30, {
         message: "First name cannot exceed 30 characters.",
-      }),
+      })
+      .regex(
+        /^[\p{L}\p{M}’'\- ]+$/u,
+        "Only letters, spaces, hyphens, or apostrophes allowed",
+      ),
     last_name: z
       .string()
       .trim()
@@ -40,7 +44,11 @@ export const SignupFormSchema = z
       })
       .max(30, {
         message: "Last name cannot exceed 30 characters.",
-      }),
+      })
+      .regex(
+        /^[\p{L}\p{M}’'\- ]+$/u,
+        "Only letters, spaces, hyphens, or apostrophes allowed",
+      ),
     username: z
       .string()
       .trim()
@@ -70,8 +78,8 @@ export const SignupFormSchema = z
       .min(8, {
         message: "Password must contain at least 8 characters.",
       })
-      .max(64, {
-        message: "Password cannot exceed 64 characters.",
+      .max(20, {
+        message: "Password cannot exceed 20 characters.",
       })
       .regex(/[a-z]/, {
         message: "Password must contain at least one lowercase letter.",
