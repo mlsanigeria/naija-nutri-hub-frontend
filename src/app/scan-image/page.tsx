@@ -40,9 +40,9 @@ export default function ScanImagePage() {
   }, []);
 
   return (
-    <main className="flex flex-col items-center justify-center min-h-screen text-white p-6">
+    <main className="flex flex-col min-h-screen text-white">
       {/* Back Button */}
-      <div className="absolute top-4 left-4">
+      <div className="absolute top-4 left-4 z-10">
         <Link
           href="/"
           className="flex items-center justify-center w-10 h-10 rounded-full bg-neutral-800 hover:bg-neutral-700"
@@ -52,13 +52,16 @@ export default function ScanImagePage() {
       </div>
 
       {/* Title */}
-      <h1 className="text-2xl font-semibold mb-8 mt-12">Scan food image</h1>
+      <div className="pt-16 pb-4 px-6">
+        <h1 className="text-2xl font-semibold text-center">Scan food image</h1>
+      </div>
 
       {/* Camera Container */}
       <div
-        className={`relative w-72 h-72 rounded-[2rem] overflow-hidden flex items-center justify-center
-        ${loading || error ? "bg-transparent border-2 border-dashed border-neutral-600" : ""}
+        className={`relative w-full flex-1 overflow-hidden flex items-center justify-center
+        ${loading || error ? "bg-transparent border-2 border-dashed border-neutral-600 mx-6 rounded-3xl" : ""}
       `}
+        style={{ height: '70vh' }}
       >
         {error ? (
           <p className="text-center text-sm text-red-400 px-4">{error}</p>
@@ -77,17 +80,31 @@ export default function ScanImagePage() {
           muted
           className={
             isStarted && !loading
-              ? "w-full h-full object-cover"
+              ? "w-full aspect-square object-cover"
               : "absolute invisible left-[-100vw]"
           }
         />
       </div>
 
-      {/* Footer */}
-      <p className="text-center text-sm text-neutral-400 mt-10 max-w-xs">
-        Scan a photo or upload an image to identify your food and its
-        nutritional information.
-      </p>
+      {/* Camera Controls */}
+      <div className="flex flex-col items-center gap-4 py-6 px-6">
+        {/* Capture Button */}
+        <button
+          className="relative flex items-center justify-center w-20 h-20 rounded-full bg-white/20 border-4 border-white hover:bg-[#e97910f8] transition-all active:scale-95"
+          onClick={() => {
+            // Add capture logic here
+            console.log('Capture photo');
+          }}
+        >
+          <div className="w-16 h-16 rounded-full bg-white" />
+        </button>
+
+        {/* Footer Text */}
+        <p className="text-center text-xs text-neutral-400 max-w-xs">
+          Scan a photo or upload an image to identify your food and its
+          nutritional information.
+        </p>
+      </div>
     </main>
   );
 }
