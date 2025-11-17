@@ -61,7 +61,7 @@ export default function ScanImagePage() {
         className={`relative w-full flex-1 overflow-hidden flex items-center justify-center
         ${loading || error ? "bg-transparent border-2 border-dashed border-neutral-600 mx-6 rounded-3xl" : ""}
       `}
-        style={{ height: '70vh' }}
+        style={{ height: "70vh" }}
       >
         {error ? (
           <p className="text-center text-sm text-red-400 px-4">{error}</p>
@@ -93,7 +93,7 @@ export default function ScanImagePage() {
           className="relative flex items-center justify-center w-20 h-20 rounded-full bg-white/20 border-4 border-white hover:bg-[#e97910f8] transition-all active:scale-95"
           onClick={() => {
             // Add capture logic here
-            console.log('Capture photo');
+            console.log("Capture photo");
           }}
         >
           <div className="w-16 h-16 rounded-full bg-white" />
