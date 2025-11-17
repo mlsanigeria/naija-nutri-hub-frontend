@@ -40,19 +40,19 @@ export default function ScanImagePage() {
   }, []);
 
   return (
-    <main className="flex flex-col min-h-screen text-white">
+    <main className="flex flex-col min-h-screen text-white px-4">
       {/* Back Button */}
       <div className="absolute top-4 left-4 z-10">
         <Link
           href="/"
-          className="flex items-center justify-center w-10 h-10 rounded-full bg-neutral-800 hover:bg-neutral-700"
+          className="flex items-center justify-center w-10 h-10 rounded-full bg-white"
         >
-          <ArrowLeft className="w-5 h-5 text-white" />
+          <ArrowLeft className="w-5 h-5 text-black" />
         </Link>
       </div>
 
       {/* Title */}
-      <div className="pt-16 pb-4 px-6">
+      <div className="pt-24 pb-4 px-6">
         <h1 className="text-2xl font-semibold text-center">Scan food image</h1>
       </div>
 
@@ -80,7 +80,7 @@ export default function ScanImagePage() {
           muted
           className={
             isStarted && !loading
-              ? "w-full aspect-square object-cover"
+              ? "w-full aspect-square object-cover rounded-lg"
               : "absolute invisible left-[-100vw]"
           }
         />
@@ -89,21 +89,31 @@ export default function ScanImagePage() {
       {/* Camera Controls */}
       <div className="flex flex-col items-center gap-4 py-6 px-6">
         {/* Capture Button */}
-        <button
-          className="relative flex items-center justify-center w-20 h-20 rounded-full bg-white/20 border-4 border-white hover:bg-[#e97910f8] transition-all active:scale-95"
-          onClick={() => {
-            // Add capture logic here
-            console.log("Capture photo");
-          }}
-        >
-          <div className="w-16 h-16 rounded-full bg-white" />
+        <button className="bg-[#FC865C] px-8 py-2 rounded-md">Scan</button>
+
+        <button className="flex items-center gap-4 bg-[#2C2C2C] py-2 px-3 rounded-md mt-2">
+          <span>
+            <img src="/icons/upload-icon.png" alt="upload" />
+          </span>
+          <span className="text-[#FDC7B4] text-sm">Add photos & files</span>
         </button>
 
         {/* Footer Text */}
-        <p className="text-center text-xs text-neutral-400 max-w-xs">
+        {/* <p className="text-center text-xs text-neutral-400 max-w-xs">
           Scan a photo or upload an image to identify your food and its
           nutritional information.
-        </p>
+        </p> */}
+      </div>
+
+      <div className="my-4">
+        <p className="text-[#EAEAEA] text-sm border-b-1 py-2 mb-4">Preview</p>
+        <div>
+          <img className="rounded-lg" src="/images/jollof-rice.png" alt="" />
+        </div>
+
+        <div className="flex justify-center mt-5">
+          <button className="bg-[#FC865C] px-8 py-2 rounded-md">Next</button>
+        </div>
       </div>
     </main>
   );
