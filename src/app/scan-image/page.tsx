@@ -58,32 +58,62 @@ export default function ScanImagePage() {
 
       {/* Camera Container */}
       <div
-        className={`relative w-full flex-1 overflow-hidden flex items-center justify-center
-        ${loading || error ? "bg-transparent border-2 border-dashed border-neutral-600 mx-6 rounded-3xl" : ""}
-      `}
+        className={`relative w-full aspect-square flex-1 overflow-hidden flex items-center justify-center
+    ${loading || error ? "bg-transparent border-2 border-dashed border-neutral-600 rounded-3xl" : "hidden"}
+  `}
         style={{ height: "70vh" }}
       >
         {error ? (
-          <p className="text-center text-sm text-red-400 px-4">{error}</p>
+          <p className="h-full flex items-center justify-center text-center text-sm text-red-400 px-4">
+            {error}
+          </p>
         ) : loading ? (
-          <p className="w-full text-center text-neutral-500 text-sm">
+          <p className="h-full flex items-center justify-center text-neutral-500 text-sm">
             Initializing camera...
           </p>
         ) : (
           ""
         )}
+      </div>
 
+      <div
+        // className="absolute invisible left-[-100vw]"
+        className={
+          isStarted && !loading
+            ? "w-full aspect-square object-cover rounded-lg relative"
+            : "absolute invisible left-[-100vw]"
+        }
+      >
         <video
           ref={videoRef}
           autoPlay
           playsInline
-          muted
-          className={
-            isStarted && !loading
-              ? "w-full aspect-square object-cover rounded-lg"
-              : "absolute invisible left-[-100vw]"
-          }
-        />
+          className="w-full h-full object-cover rounded-[32px] bg-black"
+        ></video>
+
+        <div
+          className="pointer-events-none absolute top-0 left-0 w-12 h-12 
+              border-[3px] border-[#F7D5C8] border-r-0 border-b-0 
+              rounded-tl-[24px]"
+        ></div>
+
+        <div
+          className="pointer-events-none absolute top-0 right-0 w-12 h-12 
+              border-[3px] border-[#F7D5C8] border-l-0 border-b-0 
+              rounded-tr-[24px]"
+        ></div>
+
+        <div
+          className="pointer-events-none absolute bottom-0 left-0 w-12 h-12 
+              border-[3px] border-[#F7D5C8] border-r-0 border-t-0 
+              rounded-bl-[24px]"
+        ></div>
+
+        <div
+          className="pointer-events-none absolute bottom-0 right-0 w-12 h-12 
+              border-[3px] border-[#F7D5C8] border-l-0 border-t-0 
+              rounded-br-[24px]"
+        ></div>
       </div>
 
       {/* Camera Controls */}
