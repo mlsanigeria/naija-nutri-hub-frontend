@@ -33,12 +33,12 @@ import { useRouter } from "next/navigation";
 export const NewPasswordForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const searchParams = useSearchParams();
+  // const searchParams = useSearchParams();
   const router = useRouter();
   // const token = searchParams.get("token");
 
   const [isLoading, setIsLoading] = useState(false);
-  const [_, setError] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
   const [isSuccess, setIsSuccess] = useState(false); // 2. ADD state to track success
 
   const form = useForm<z.infer<typeof NewPasswordFormSchema>>({
@@ -47,6 +47,7 @@ export const NewPasswordForm = () => {
   });
 
   async function onSubmit(values: z.infer<typeof NewPasswordFormSchema>) {
+    console.log(values, error);
     setIsLoading(true);
     setError(null);
     try {

@@ -24,7 +24,7 @@ export default function ScanImagePage() {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [previewImage, setPreviewImage] = useState<string | null>(null);
-  let [imageBlob, setImageBlob] = useState<Blob | null>(null);
+  const [imageBlob, setImageBlob] = useState<Blob | null>(null);
   // const [result, setResult] = useState<IClassificationResult | null>({
   //   food_name: "Jollof Rice",
   //   description: "A popular West African rice dish cooked in tomato sauce with spices",
