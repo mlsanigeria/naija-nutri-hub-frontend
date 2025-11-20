@@ -23,9 +23,11 @@ import { toast } from "sonner";
 import { axiosInstance } from "@/lib/axios";
 import { parseErrorMessage } from "@/lib/utils";
 import { ErrorDetailField } from "@/lib/types";
+import { useAuthStore } from "@/stores/auth";
 
 export function LoginForm() {
   const router = useRouter();
+  const setUser = useAuthStore((s) => s.setUser);
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -61,12 +63,14 @@ export function LoginForm() {
       formBody.append("grant_type", "password");
 
       // Send as x-www-form-urlencoded
-      await axiosInstance.post("/login", formBody, {
+      const response = await axiosInstance.post("/login", formBody, {
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
       });
 
+      setUser({ token: response.data?.access_token });
       router.push("/image-request");
     } catch (apiError: unknown) {
+      console.error(apiError);
       const responseDetail = (
         apiError as { response?: { data?: { detail?: ErrorDetailField } } }
       )?.response?.data?.detail;

@@ -35,7 +35,7 @@ export const ResetPasswordForm = () => {
 
   async function onSubmit(data: z.infer<typeof ForgotPasswordFormSchema>) {
     // make api call to reset password
-
+    console.log(data);
     toast.success("Reset link sent to your email!");
     router.push("/verify-account");
   }
