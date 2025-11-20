@@ -35,10 +35,10 @@ export const NewPasswordForm = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const searchParams = useSearchParams();
   const router = useRouter();
-  const token = searchParams.get("token");
+  // const token = searchParams.get("token");
 
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [_, setError] = useState<string | null>(null);
   const [isSuccess, setIsSuccess] = useState(false); // 2. ADD state to track success
 
   const form = useForm<z.infer<typeof NewPasswordFormSchema>>({
@@ -66,7 +66,7 @@ export const NewPasswordForm = () => {
 
       // On success, set the success state to true
       setIsSuccess(true);
-    } catch (apiError) {
+    } catch {
       setError("Your password reset link may be invalid or expired.");
     } finally {
       setIsLoading(false);
