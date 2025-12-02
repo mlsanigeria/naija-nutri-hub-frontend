@@ -143,6 +143,6 @@ export default function VerifyResetOtpPage() {
       fallback={<div className="text-white text-center mt-10">Loading...</div>}
     >
       <VerifyResetOtpContent />
-    </Suspense> 
+    </Suspense>
   );
 }
