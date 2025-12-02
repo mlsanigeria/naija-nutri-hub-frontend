@@ -88,21 +88,20 @@ Watch our info session on how to get started with Hacktoberfest and contribute t
 We maintain a leaderboard to track your contributions and their impact on our projects. The more you contribute, the higher you'll climb on the leaderboard.
 
 <!-- Section Start -->
-
 ### Top 10 Contributors
 
 Thank you to all our fantastic contributors for their hard work and dedication! Here are our top 10 contributors:
 
-| S/N | Rank |                                                                                                       | Contributor                                               | Merged PRs |
-| --- | ---- | ----------------------------------------------------------------------------------------------------- | --------------------------------------------------------- | ---------- |
-| 1   | 🥇   | <img src='https://avatars.githubusercontent.com/u/131811805?v=4' alt='Avatar' width='30' height='30'> | [Seyi-Amusan](https://github.com/Seyi-Amusan)             | 15         |
-| 2   | 🥈   | <img src='https://avatars.githubusercontent.com/u/116392457?v=4' alt='Avatar' width='30' height='30'> | [alexgrate](https://github.com/alexgrate)                 | 6          |
-| 3   | 🥉   | <img src='https://avatars.githubusercontent.com/u/193773700?v=4' alt='Avatar' width='30' height='30'> | [aryadharmadhikari](https://github.com/aryadharmadhikari) | 4          |
-| 4   | 4    | <img src='https://avatars.githubusercontent.com/u/101010436?v=4' alt='Avatar' width='30' height='30'> | [MichaelOmoniyi](https://github.com/MichaelOmoniyi)       | 3          |
-| 5   | 5    | <img src='https://avatars.githubusercontent.com/u/42422184?v=4' alt='Avatar' width='30' height='30'>  | [coded1guy](https://github.com/coded1guy)                 | 1          |
-| 6   | 5    | <img src='https://avatars.githubusercontent.com/u/73708569?v=4' alt='Avatar' width='30' height='30'>  | [Jonniie](https://github.com/Jonniie)                     | 1          |
-| 7   | 5    | <img src='https://avatars.githubusercontent.com/u/59177747?v=4' alt='Avatar' width='30' height='30'>  | [KeneNwogu](https://github.com/KeneNwogu)                 | 1          |
-| 8   | 5    | <img src='https://avatars.githubusercontent.com/u/168524066?v=4' alt='Avatar' width='30' height='30'> | [kumaradarsh2](https://github.com/kumaradarsh2)           | 1          |
+| S/N | Rank || Contributor | Merged PRs |
+|--| ---- | -- |----------- | ---------- |
+| 1 | 🥇 | <img src='https://avatars.githubusercontent.com/u/131811805?v=4' alt='Avatar' width='30' height='30'> | [Seyi-Amusan](https://github.com/Seyi-Amusan) | 15 |
+| 2 | 🥈 | <img src='https://avatars.githubusercontent.com/u/116392457?v=4' alt='Avatar' width='30' height='30'> | [alexgrate](https://github.com/alexgrate) | 6 |
+| 3 | 🥉 | <img src='https://avatars.githubusercontent.com/u/193773700?v=4' alt='Avatar' width='30' height='30'> | [aryadharmadhikari](https://github.com/aryadharmadhikari) | 4 |
+| 4 | 4 | <img src='https://avatars.githubusercontent.com/u/101010436?v=4' alt='Avatar' width='30' height='30'> | [MichaelOmoniyi](https://github.com/MichaelOmoniyi) | 3 |
+| 5 | 5 | <img src='https://avatars.githubusercontent.com/u/59177747?v=4' alt='Avatar' width='30' height='30'> | [KeneNwogu](https://github.com/KeneNwogu) | 2 |
+| 6 | 6 | <img src='https://avatars.githubusercontent.com/u/42422184?v=4' alt='Avatar' width='30' height='30'> | [coded1guy](https://github.com/coded1guy) | 1 |
+| 7 | 6 | <img src='https://avatars.githubusercontent.com/u/73708569?v=4' alt='Avatar' width='30' height='30'> | [Jonniie](https://github.com/Jonniie) | 1 |
+| 8 | 6 | <img src='https://avatars.githubusercontent.com/u/168524066?v=4' alt='Avatar' width='30' height='30'> | [kumaradarsh2](https://github.com/kumaradarsh2) | 1 |
 
 Thank you to all our fantastic contributors for their hard work and dedication!
 
