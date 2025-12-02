@@ -33,9 +33,9 @@ import { useRouter } from "next/navigation";
 export const NewPasswordForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const searchParams = useSearchParams();
+  // const searchParams = useSearchParams();
   const router = useRouter();
-  const token = searchParams.get("token");
+  // const token = searchParams.get("token");
 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -47,6 +47,7 @@ export const NewPasswordForm = () => {
   });
 
   async function onSubmit(values: z.infer<typeof NewPasswordFormSchema>) {
+    console.log(values, error);
     setIsLoading(true);
     setError(null);
     try {
@@ -66,7 +67,7 @@ export const NewPasswordForm = () => {
 
       // On success, set the success state to true
       setIsSuccess(true);
-    } catch (apiError) {
+    } catch {
       setError("Your password reset link may be invalid or expired.");
     } finally {
       setIsLoading(false);
