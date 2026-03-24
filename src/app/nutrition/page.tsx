@@ -85,7 +85,9 @@ function NutritionContent() {
   const [extraInputs, setExtraInputs] = useState(extraFromUrl);
   const [nutrition, setNutrition] = useState<NutritionData | null>(null);
   const [loading, setLoading] = useState(false);
-  const [servingCount, setServingCount] = useState(1);
+  const [servingCount, setServingCount] = useState(
+    portionFromUrl ? parseInt(portionFromUrl) || 1 : 1,
+  );
 
   useEffect(() => {
     if (!hasHydrated) return;

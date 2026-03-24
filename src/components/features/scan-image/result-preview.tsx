@@ -46,6 +46,10 @@ export const ScannedImagePreview = (data: {
     router.back();
   };
 
+  const handleFoodLocationClick = () => {
+    router.push("/coming-soon");
+  };
+
   return (
     <main className="flex flex-col min-h-screen bg-background text-foreground">
       {/* Header with Back and Profile buttons */}
@@ -170,7 +174,10 @@ export const ScannedImagePreview = (data: {
           >
             Recipe
           </button>
-          <button className="w-full py-3 rounded-xl text-base font-medium text-black bg-[#FB6E3D] shadow-[0_4px_0_#FDAC8F] hover:scale-[1.02] active:translate-y-[2px] active:shadow-[0_2px_0_#FDAC8F] transition-all duration-150">
+          <button
+            onClick={handleFoodLocationClick}
+            className="w-full py-3 rounded-xl text-base font-medium text-black bg-[#FB6E3D] shadow-[0_4px_0_#FDAC8F] hover:scale-[1.02] active:translate-y-[2px] active:shadow-[0_2px_0_#FDAC8F] transition-all duration-150"
+          >
             Food Location
           </button>
         </div>

@@ -7,6 +7,7 @@ import Image from "next/image";
 import { axiosInstance } from "@/lib/axios";
 import { ScannedImagePreview } from "@/components/features/scan-image/result-preview";
 import { useAuthStore } from "@/stores/auth";
+import { ProfileDropdown } from "@/components/ui/profile-dropdown";
 
 interface IClassificationResult {
   food_name: string;
@@ -220,17 +221,18 @@ export default function ScanImagePage() {
       {/* Hidden canvas for image capture fallback */}
       <canvas ref={canvasRef} className="hidden" />
 
-      {/* Back Button */}
-      <div className="absolute top-4 left-4 z-10">
+      {/* Header with Back Button and Profile */}
+      <div className="absolute top-4 left-4 right-4 z-10 flex items-center justify-between">
         <button
           onClick={() => {
             stopCamera();
             router.back();
           }}
-          className="flex items-center justify-center w-10 h-10 rounded-full bg-white"
+          className="flex items-center justify-center w-10 h-10 rounded-full bg-secondary"
         >
-          <ArrowLeft className="w-5 h-5 text-black" />
+          <ArrowLeft className="w-5 h-5" />
         </button>
+        <ProfileDropdown />
       </div>
 
       {/* Title */}
