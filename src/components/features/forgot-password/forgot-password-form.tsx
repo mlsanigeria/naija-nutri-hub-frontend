@@ -74,7 +74,7 @@ export const ForgotPasswordForm = () => {
           render={({ field }) => (
             <FormItem>
               <FormLabel
-                className="text-white text-sm leading-none"
+                className="text-foreground text-sm leading-none"
                 style={{ fontFamily: "var(--font-manrope)" }}
               >
                 Email
@@ -88,7 +88,7 @@ export const ForgotPasswordForm = () => {
                   />
                   <Input
                     placeholder="Enter email"
-                    className="bg-[#222222] border border-[#444444] rounded-md pl-10 h-12 text-white"
+                    className="bg-input border border-border rounded-md pl-10 h-12 text-foreground"
                     {...field}
                   />
                 </div>

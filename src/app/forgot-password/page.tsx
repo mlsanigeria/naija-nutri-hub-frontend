@@ -8,13 +8,13 @@ export default function ForgotPasswordPage() {
   const router = useRouter();
 
   return (
-    <main className="flex min-h-screen text-center flex-col items-center justify-center bg-[#222222] relative">
+    <main className="flex min-h-screen text-center flex-col items-center justify-center bg-background relative">
       {/* Back Button */}
       <button
         onClick={() => router.back()}
         className="absolute top-6 left-6 w-10 h-10 rounded-full bg-secondary flex items-center justify-center"
       >
-        <ArrowLeft className="w-5 h-5 text-white" />
+        <ArrowLeft className="w-5 h-5 text-foreground" />
       </button>
 
       <section className="w-full max-w-md px-8">
@@ -25,7 +25,7 @@ export default function ForgotPasswordPage() {
           Reset your password
         </h2>
         <p
-          className="text-gray-40  0 mb-6"
+          className="text-muted-foreground mb-6"
           style={{ fontFamily: "var(--font-manrope)" }}
         >
           Enter your email address and we&apos;ll send you a link to reset your
