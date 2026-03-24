@@ -101,21 +101,23 @@ export default function ProfilePage() {
 
       {/* User Info Card */}
       <div className="bg-card rounded-2xl p-4 mb-6">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center">
+        <div className="flex items-center justify-between gap-3">
+          <div className="flex items-center gap-3 min-w-0">
+            <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center flex-shrink-0">
               <User className="w-5 h-5 text-muted-foreground" />
             </div>
-            <div>
-              <p className="font-medium">{profile?.username || "User"}</p>
-              <p className="text-sm text-muted-foreground">
+            <div className="min-w-0">
+              <p className="font-medium truncate">
+                {profile?.username || "User"}
+              </p>
+              <p className="text-sm text-muted-foreground truncate">
                 {profile?.email || "user@email.com"}
               </p>
             </div>
           </div>
           <Button
             onClick={() => setShowChangeUsername(true)}
-            className="bg-primary hover:bg-primary/90 text-white text-sm px-4 py-2 rounded-lg whitespace-nowrap"
+            className="bg-primary hover:bg-primary/90 text-white text-xs sm:text-sm px-3 sm:px-4 py-2 rounded-lg whitespace-nowrap flex-shrink-0"
           >
             Change Username
           </Button>
