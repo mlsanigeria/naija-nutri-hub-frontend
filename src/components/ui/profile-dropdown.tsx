@@ -51,8 +51,14 @@ export function ProfileDropdown({ className = "" }: ProfileDropdownProps) {
     router.push("/login");
   };
 
-  // Get first letter of username for avatar
-  const getInitial = () => {
+  // Get initials from first and last name, fallback to username
+  const getInitials = () => {
+    if (user?.firstname && user?.lastname) {
+      return (
+        user.firstname.charAt(0).toUpperCase() +
+        user.lastname.charAt(0).toUpperCase()
+      );
+    }
     if (user?.username) {
       return user.username.charAt(0).toUpperCase();
     }
@@ -83,7 +89,7 @@ export function ProfileDropdown({ className = "" }: ProfileDropdownProps) {
         aria-label="Profile menu"
       >
         {isAuthenticated ? (
-          <span className="text-sm">{getInitial()}</span>
+          <span className="text-xs">{getInitials()}</span>
         ) : (
           <User className="w-5 h-5" />
         )}
@@ -97,8 +103,8 @@ export function ProfileDropdown({ className = "" }: ProfileDropdownProps) {
               {/* User Info Header */}
               <div className="px-4 py-3 border-b border-border bg-secondary/30">
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-semibold text-sm">
-                    {getInitial()}
+                  <div className="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-semibold text-xs">
+                    {getInitials()}
                   </div>
                   <div className="overflow-hidden">
                     <p className="font-medium text-sm truncate">

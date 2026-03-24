@@ -76,6 +76,8 @@ export function LoginForm() {
         token: response.data?.access_token,
         email: email,
         username: response.data?.username || requestBody.username,
+        firstname: response.data?.firstname,
+        lastname: response.data?.lastname,
       });
       router.push("/");
     } catch (apiError: unknown) {
