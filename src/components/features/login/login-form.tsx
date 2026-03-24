@@ -67,8 +67,17 @@ export function LoginForm() {
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
       });
 
-      setUser({ token: response.data?.access_token });
-      router.push("/image-request");
+      // Save token and email (identifier could be email or username)
+      const email = requestBody.username.includes("@")
+        ? requestBody.username
+        : response.data?.email || requestBody.username;
+
+      setUser({
+        token: response.data?.access_token,
+        email: email,
+        username: response.data?.username || requestBody.username,
+      });
+      router.push("/");
     } catch (apiError: unknown) {
       console.error(apiError);
       const responseDetail = (

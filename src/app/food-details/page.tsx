@@ -1,11 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import Link from "next/link";
 
 export default function FoodDetailsPage() {
-  const [activeTab, setActiveTab] = useState("nutritional");
   const [ingredientsExpanded, setIngredientsExpanded] = useState(false);
   const [ingredientsHeight, setIngredientsHeight] = useState(0);
   const ingredientsRef = useRef<HTMLDivElement>(null);

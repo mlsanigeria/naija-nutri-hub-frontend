@@ -1,22 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import {
-  EyeIcon,
-  EyeOffIcon,
-  LockIcon,
-  CheckCircle2,
-  CheckCircle,
-  CircleCheck,
-  CheckCheckIcon,
-  LucideCheckCircle,
-  LucideCheckCircle2,
-  CheckCircle2Icon,
-} from "lucide-react"; // 1. IMPORT CheckCircle2 icon
+import { EyeIcon, EyeOffIcon, LockIcon, CheckCircle2 } from "lucide-react";
 import { NewPasswordFormSchema } from "@/lib/zod";
 import { Button } from "@/components/ui/button";
 import {

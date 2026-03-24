@@ -17,6 +17,7 @@ import {
   MailIcon,
 } from "lucide-react";
 
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -83,8 +84,16 @@ export const SignUpForm = () => {
 
   return (
     <div className="flex flex-col items-center text-center space-y-8 w-full max-w-md px-4">
+      {/* Logo */}
+      <Image
+        src="/images/logo.png"
+        alt="Naija Nutri Hub"
+        width={80}
+        height={80}
+        className="w-20 h-20 rounded-full mt-6"
+      />
       {/* 1. Title */}
-      <h1 className="text-3xl sm:text-4xl font-serif pt-8 pb-4 px-4">
+      <h1 className="text-3xl sm:text-4xl font-serif pb-4 px-4">
         Create an account to get started
       </h1>
 
