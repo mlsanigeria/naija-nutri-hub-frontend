@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowLeft, Share2, Store, Flame, ChevronDown } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
+import { ArrowLeft, Store, Flame, ChevronDown } from "lucide-react";
+import { ProfileDropdown } from "@/components/ui/profile-dropdown";
 
 export const ScannedImagePreview = (data: {
   food_name: string;
@@ -13,24 +14,49 @@ export const ScannedImagePreview = (data: {
   source: string;
   image: string | Blob;
 }) => {
+  const router = useRouter();
   const [isIngredientsOpen, setIsIngredientsOpen] = useState(false);
+
+  const handleRecipeClick = () => {
+    const imageUrl =
+      typeof data.image === "string"
+        ? data.image
+        : URL.createObjectURL(data.image);
+    const params = new URLSearchParams({
+      food: data.food_name,
+      image: imageUrl,
+    });
+    router.push(`/recipe?${params.toString()}`);
+  };
+
+  const handleNutritionClick = () => {
+    const imageUrl =
+      typeof data.image === "string"
+        ? data.image
+        : URL.createObjectURL(data.image);
+    const params = new URLSearchParams({
+      food: data.food_name,
+      image: imageUrl,
+    });
+    router.push(`/nutrition?${params.toString()}`);
+  };
+
+  const handleBack = () => {
+    router.back();
+  };
 
   return (
     <main className="flex flex-col min-h-screen bg-background text-foreground">
-      {/* Header with Back and Share buttons */}
+      {/* Header with Back and Profile buttons */}
       <div className="absolute top-4 left-0 right-0 z-10 flex justify-between items-center px-4">
         <button
+          onClick={handleBack}
           className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center hover:bg-white/20 transition-colors"
           aria-label="Go back"
         >
           <ArrowLeft size={20} className="text-white" />
         </button>
-        <button
-          className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center hover:bg-white/20 transition-colors"
-          aria-label="Share"
-        >
-          <Share2 size={20} className="text-white" />
-        </button>
+        <ProfileDropdown />
       </div>
 
       {/* Food Image Hero Section */}
@@ -124,16 +150,22 @@ export const ScannedImagePreview = (data: {
         </div>
 
         {/* Action Buttons */}
-        <div className="space-y-3">
-          <Button className="w-full h-12 text-base font-medium rounded-xl">
+        <div className="space-y-4">
+          <button
+            onClick={handleNutritionClick}
+            className="w-full py-3 rounded-xl text-base font-medium text-black bg-[#FB6E3D] shadow-[0_4px_0_#FDAC8F] hover:scale-[1.02] active:translate-y-[2px] active:shadow-[0_2px_0_#FDAC8F] transition-all duration-150"
+          >
             Nutritional value
-          </Button>
-          <Button className="w-full h-12 text-base font-medium rounded-xl">
+          </button>
+          <button
+            onClick={handleRecipeClick}
+            className="w-full py-3 rounded-xl text-base font-medium text-black bg-[#FB6E3D] shadow-[0_4px_0_#FDAC8F] hover:scale-[1.02] active:translate-y-[2px] active:shadow-[0_2px_0_#FDAC8F] transition-all duration-150"
+          >
             Recipe
-          </Button>
-          <Button className="w-full h-12 text-base font-medium rounded-xl">
+          </button>
+          <button className="w-full py-3 rounded-xl text-base font-medium text-black bg-[#FB6E3D] shadow-[0_4px_0_#FDAC8F] hover:scale-[1.02] active:translate-y-[2px] active:shadow-[0_2px_0_#FDAC8F] transition-all duration-150">
             Food Location
-          </Button>
+          </button>
         </div>
       </div>
     </main>
