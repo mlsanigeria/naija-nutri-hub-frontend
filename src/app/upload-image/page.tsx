@@ -254,11 +254,13 @@ function UploadImageContent() {
         ) : (
           /* Preview with action buttons */
           <div className="space-y-4">
-            <div className="relative">
-              <img
+            <div className="relative w-full max-h-80 aspect-video">
+              <Image
                 src={previewUrl}
                 alt="preview"
-                className="rounded-xl w-full max-h-80 object-cover border border-neutral-800"
+                fill
+                className="rounded-xl object-cover border border-neutral-800"
+                unoptimized
               />
               <button
                 onClick={clearImage}

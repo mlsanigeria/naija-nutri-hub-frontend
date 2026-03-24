@@ -13,6 +13,7 @@ import {
   Settings,
 } from "lucide-react";
 import { useAuthStore } from "@/stores/auth";
+import { axiosInstance } from "@/lib/axios";
 
 interface ProfileDropdownProps {
   className?: string;
@@ -23,8 +24,38 @@ export function ProfileDropdown({ className = "" }: ProfileDropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const { user, theme, setTheme, logout } = useAuthStore();
+  const { user, theme, setTheme, logout, updateProfile } = useAuthStore();
   const hasHydrated = useAuthStore((s) => s.hasHydrated);
+
+  // Fetch profile names if missing (once after login)
+  useEffect(() => {
+    if (!hasHydrated || !user?.token || (user.firstname && user.lastname))
+      return;
+
+    const fetchProfileNames = async () => {
+      try {
+        const response = await axiosInstance.get("/users/me", {
+          headers: { Authorization: `Bearer ${user.token}` },
+        });
+        if (response.data.firstname || response.data.lastname) {
+          updateProfile({
+            firstname: response.data.firstname,
+            lastname: response.data.lastname,
+          });
+        }
+      } catch {
+        // Silently fail - will just show username initial
+      }
+    };
+
+    fetchProfileNames();
+  }, [
+    hasHydrated,
+    user?.token,
+    user?.firstname,
+    user?.lastname,
+    updateProfile,
+  ]);
 
   // Close dropdown when clicking outside
   useEffect(() => {

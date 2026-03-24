@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import { ArrowLeft, Loader2 } from "lucide-react";
 import { useAuthStore } from "@/stores/auth";
 import { axiosInstance } from "@/lib/axios";
@@ -187,10 +188,12 @@ export default function ClassificationResultPage() {
       {/* Image Preview */}
       {imageUrl && (
         <div className="relative w-full h-64 overflow-hidden">
-          <img
+          <Image
             src={imageUrl}
             alt="Food to classify"
-            className="w-full h-full object-cover"
+            fill
+            className="object-cover"
+            unoptimized
           />
         </div>
       )}

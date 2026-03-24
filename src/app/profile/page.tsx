@@ -20,7 +20,7 @@ interface UserProfile {
 
 export default function ProfilePage() {
   const router = useRouter();
-  const { user, theme, setTheme, logout } = useAuthStore();
+  const { user, theme, setTheme, logout, updateProfile } = useAuthStore();
   const hasHydrated = useAuthStore((s) => s.hasHydrated);
   const [showChangeUsername, setShowChangeUsername] = useState(false);
   const [showDeleteAccount, setShowDeleteAccount] = useState(false);
@@ -43,6 +43,13 @@ export default function ProfilePage() {
           },
         });
         setProfile(response.data);
+        // Sync firstname/lastname to auth store for profile initials
+        if (response.data.firstname || response.data.lastname) {
+          updateProfile({
+            firstname: response.data.firstname,
+            lastname: response.data.lastname,
+          });
+        }
       } catch (error) {
         console.error("Failed to fetch profile:", error);
       } finally {

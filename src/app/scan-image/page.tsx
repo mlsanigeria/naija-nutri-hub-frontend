@@ -3,6 +3,7 @@
 import { ChangeEvent, useEffect, useRef, useState, useCallback } from "react";
 import { ArrowLeft } from "lucide-react";
 import { useRouter, usePathname } from "next/navigation";
+import Image from "next/image";
 import { axiosInstance } from "@/lib/axios";
 import { ScannedImagePreview } from "@/components/features/scan-image/result-preview";
 import { useAuthStore } from "@/stores/auth";
@@ -311,7 +312,12 @@ export default function ScanImagePage() {
 
         <label className="flex items-center gap-4 bg-[#2C2C2C] py-2 px-3 rounded-md mt-2 cursor-pointer">
           <span>
-            <img src="/icons/upload-icon.png" alt="upload" />
+            <Image
+              src="/icons/upload-icon.png"
+              alt="upload"
+              width={24}
+              height={24}
+            />
           </span>
           <span className="text-[#FDC7B4] text-sm">Add photos & files</span>
           <input
@@ -332,11 +338,13 @@ export default function ScanImagePage() {
       {previewImage && (
         <div ref={previewRef} className="my-4 w-full max-w-md mx-auto px-4">
           <p className="text-[#EAEAEA] text-sm border-b-1 py-2 mb-4">Preview</p>
-          <div>
-            <img
-              className="rounded-lg w-full aspect-square object-cover"
+          <div className="relative w-full aspect-square">
+            <Image
+              className="rounded-lg object-cover"
               src={previewImage!}
               alt="Captured preview"
+              fill
+              unoptimized
             />
           </div>
 
