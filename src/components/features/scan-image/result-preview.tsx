@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowLeft, Store, Flame, ChevronDown } from "lucide-react";
 import { ProfileDropdown } from "@/components/ui/profile-dropdown";
+import Image from "next/image";
 
 export const ScannedImagePreview = (data: {
   food_name: string;
@@ -61,11 +62,17 @@ export const ScannedImagePreview = (data: {
 
       {/* Food Image Hero Section */}
       <div className="relative w-full h-64 overflow-hidden">
-        <img
-          src={data.image}
-          alt="Rebbit Visual on Pexels"
-          className="w-full h-full object-cover"
+        <Image
+          src={
+            typeof data.image === "string"
+              ? data.image
+              : URL.createObjectURL(data.image)
+          }
+          alt={data.food_name}
+          fill
+          className="object-cover"
           style={{ backgroundColor: "#BD843B" }}
+          unoptimized
         />
       </div>
 

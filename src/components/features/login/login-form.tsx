@@ -18,6 +18,7 @@ import { Input } from "@/components/ui/input";
 import { LoginFormSchema } from "@/lib/zod";
 import { EyeIcon, EyeOffIcon, User } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { toast } from "sonner";
 
 import { axiosInstance } from "@/lib/axios";
@@ -148,10 +149,12 @@ export function LoginForm() {
                       className="bg-[#222222] border border-[#444444] rounded-md pl-10 pr-10 h-12 text-white"
                       {...field}
                     />
-                    <img
+                    <Image
                       src="/icons/square-lock-password.png"
                       alt="lock"
-                      className="absolute left-3 top-1/2 -translate-y-1/2 size-5"
+                      width={20}
+                      height={20}
+                      className="absolute left-3 top-1/2 -translate-y-1/2"
                     />
                     <Button
                       type="button"

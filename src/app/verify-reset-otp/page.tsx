@@ -2,6 +2,7 @@
 
 import { Suspense, useState, useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
@@ -90,7 +91,7 @@ function VerifyResetOtpContent() {
 
         {/* Mail Icon */}
         <div className="flex justify-center mb-6">
-          <img src="icons/mail-02.png" alt="mail" className="h-14" />
+          <Image src="/icons/mail-02.png" alt="mail" width={56} height={56} />
         </div>
 
         {/* Instruction Text */}

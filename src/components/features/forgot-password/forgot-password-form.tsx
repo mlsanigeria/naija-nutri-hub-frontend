@@ -18,6 +18,7 @@ import { Input } from "@/components/ui/input";
 import { ForgotPasswordFormSchema } from "@/lib/zod";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import Image from "next/image";
 
 export const ForgotPasswordForm = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -81,10 +82,12 @@ export const ForgotPasswordForm = () => {
               </FormLabel>
               <FormControl>
                 <div className="relative">
-                  <img
+                  <Image
                     src="/icons/mail-01.png"
                     alt="mail"
-                    className="absolute left-3 top-1/2 -translate-y-1/2 size-5"
+                    width={20}
+                    height={20}
+                    className="absolute left-3 top-1/2 -translate-y-1/2"
                   />
                   <Input
                     placeholder="Enter email"

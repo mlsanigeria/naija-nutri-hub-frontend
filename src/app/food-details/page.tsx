@@ -54,10 +54,12 @@ export default function FoodDetailsPage() {
           {/* Food Attributes Grid */}
           <div className="grid grid-cols-2 gap-4 mb-6">
             <div className="flex items-center space-x-3 bg-[#FFEDE7] p-3 rounded-xl">
-              <img
+              <Image
                 src="/icons/maps-global-01.png"
                 alt="Food Origin"
-                className="w-8 h-8 object-contain"
+                width={32}
+                height={32}
+                className="object-contain"
               />
               <div className="space-y-1">
                 <h3 className="text-[#FC865C] text-sm font-medium">
@@ -68,10 +70,12 @@ export default function FoodDetailsPage() {
             </div>
 
             <div className="flex items-center space-x-3 bg-[#FFEDE7] p-3 rounded-xl">
-              <img
+              <Image
                 src="/icons/pepicons-print_fire.png"
                 alt="Spice Level"
-                className="w-8 h-8 object-contain"
+                width={32}
+                height={32}
+                className="object-contain"
               />
               <div className="space-y-1">
                 <h3 className="text-[#FC865C] text-sm font-medium">

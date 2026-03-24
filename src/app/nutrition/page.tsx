@@ -315,10 +315,12 @@ function NutritionContent() {
       {/* Hero Image */}
       <div className="relative h-56 w-full">
         {imageUrl ? (
-          <img
+          <Image
             src={decodeURIComponent(imageUrl)}
             alt={currentFoodName}
-            className="w-full h-full object-cover"
+            fill
+            className="object-cover"
+            unoptimized
           />
         ) : (
           <div className="w-full h-full bg-gradient-to-br from-primary/30 to-primary/10 flex items-center justify-center">

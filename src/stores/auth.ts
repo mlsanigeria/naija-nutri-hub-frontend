@@ -16,6 +16,7 @@ interface AuthState {
   hasHydrated: boolean;
   setUser: (u: User | null) => void;
   updateUsername: (username: string) => void;
+  updateProfile: (profile: { firstname?: string; lastname?: string }) => void;
   setTheme: (theme: "light" | "dark") => void;
   logout: () => void;
   setHasHydrated: (state: boolean) => void;
@@ -31,6 +32,10 @@ export const useAuthStore = create<AuthState>()(
       updateUsername: (username) =>
         set((state) => ({
           user: state.user ? { ...state.user, username } : null,
+        })),
+      updateProfile: (profile) =>
+        set((state) => ({
+          user: state.user ? { ...state.user, ...profile } : null,
         })),
       setTheme: (theme) => set({ theme }),
       logout: () => set({ user: null }),
