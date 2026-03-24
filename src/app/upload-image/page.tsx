@@ -209,13 +209,16 @@ function UploadImageContent() {
   }
 
   return (
-    <div className="min-h-screen text-white flex flex-col items-center justify-center p-5">
+    <div className="min-h-screen text-foreground flex flex-col items-center p-5 pt-10">
       <div className="w-full max-w-md">
         {/* Header */}
         <div className="flex items-center justify-between mb-6">
-          <div className="flex items-center gap-2">
-            <button onClick={handleBack}>
-              <ArrowLeft className="text-[#FF7A50]" />
+          <div className="flex items-center gap-4">
+            <button
+              onClick={handleBack}
+              className="flex items-center justify-center w-10 h-10 rounded-full bg-secondary"
+            >
+              <ArrowLeft className="w-5 h-5" />
             </button>
             <h1 className="text-lg font-semibold">
               {fromHistory ? "Previous Scan" : "Add photos & files"}
@@ -233,12 +236,12 @@ function UploadImageContent() {
             className={`flex flex-col items-center justify-center border-2 border-dashed rounded-2xl py-20 cursor-pointer transition-all ${
               isDragging
                 ? "border-[#FF7A50] bg-[#FF7A50]/10"
-                : "border-neutral-700 hover:border-[#FF7A50]"
+                : "border-border hover:border-[#FF7A50]"
             }`}
           >
             <label htmlFor="fileUpload" className="cursor-pointer text-center">
               <Upload size={40} className="text-[#FF7A50] mb-4 mx-auto" />
-              <p className="text-neutral-400">
+              <p className="text-muted-foreground">
                 Drag and drop an image here, or{" "}
                 <span className="text-[#FF7A50]">browse files</span>
               </p>
@@ -259,7 +262,7 @@ function UploadImageContent() {
                 src={previewUrl}
                 alt="preview"
                 fill
-                className="rounded-xl object-cover border border-neutral-800"
+                className="rounded-xl object-cover border border-border"
                 unoptimized
               />
               <button
@@ -276,7 +279,7 @@ function UploadImageContent() {
               <Button
                 onClick={clearImage}
                 variant="outline"
-                className="flex-1 border-neutral-700 text-neutral-300 hover:bg-neutral-800"
+                className="flex-1"
                 disabled={loading}
               >
                 Choose Another
@@ -305,7 +308,7 @@ function UploadImageContent() {
         )}
 
         {/* Footer */}
-        <p className="mt-10 text-sm text-neutral-400 max-w-full text-center">
+        <p className="mt-10 text-sm text-muted-foreground max-w-full text-center">
           Scan a photo or upload an image to identify your food and its
           nutritional information.
         </p>

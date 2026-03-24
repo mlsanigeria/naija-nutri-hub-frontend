@@ -28,6 +28,16 @@ function VerifyResetOtpContent() {
     }
   };
 
+  const handleKeyDown = (
+    e: React.KeyboardEvent<HTMLInputElement>,
+    index: number,
+  ) => {
+    if (e.key === "Backspace" && !otp[index] && index > 0) {
+      // Move to previous input when backspace is pressed on empty field
+      inputRefs.current[index - 1]?.focus();
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const otpCode = otp.join("");
@@ -113,6 +123,7 @@ function VerifyResetOtpContent() {
                 }}
                 value={digit}
                 onChange={(e) => handleChange(e.target.value, index)}
+                onKeyDown={(e) => handleKeyDown(e, index)}
                 maxLength={1}
                 disabled={loading}
                 className="w-14 h-14 text-center text-foreground text-lg bg-transparent border border-border rounded-sm focus:border-primary focus:ring-0"

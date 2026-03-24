@@ -99,7 +99,7 @@ export const VerifyAccountForm = () => {
       setIsOtpIncorrect(false);
 
       const response = await fetch(
-        "https://naija-nutri-hub.azurewebsites.net/verify",
+        `${process.env.NEXT_PUBLIC_API_URL}/verify`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -159,6 +159,7 @@ export const VerifyAccountForm = () => {
                     autoFocus
                     maxLength={6}
                     pattern={REGEXP_ONLY_DIGITS}
+                    pushPasswordManagerStrategy="none"
                     {...field}
                   >
                     <InputOTPGroup className="gap-2">
@@ -196,28 +197,31 @@ export const VerifyAccountForm = () => {
             )}
           />
 
-          {isOtpIncorrect ? (
+          {/* Error/Success messages */}
+          {isOtpIncorrect && (
             <div className="flex items-center justify-center gap-2 text-sm text-destructive">
               <AlertCircle className="h-4 w-4" />
               <p>Security code doesn&apos;t match</p>
             </div>
-          ) : resendStatus === "success" ? (
+          )}
+          {resendStatus === "success" && (
             <p className="text-sm text-green-600">
               New OTP sent successfully 🎉
             </p>
-          ) : resendStatus === "error" ? (
-            <p className="text-sm text-destructive">{errorMessage}</p>
-          ) : (
-            <button
-              onClick={handleResendOtp}
-              disabled={resendStatus === "loading"}
-              className="text-sm text-primary hover:underline disabled:opacity-50"
-            >
-              {resendStatus === "loading"
-                ? "Sending..."
-                : "Resend code by Email"}
-            </button>
           )}
+          {resendStatus === "error" && (
+            <p className="text-sm text-destructive">{errorMessage}</p>
+          )}
+
+          {/* Resend button - always visible */}
+          <button
+            type="button"
+            onClick={handleResendOtp}
+            disabled={resendStatus === "loading"}
+            className="text-sm text-primary hover:underline disabled:opacity-50"
+          >
+            {resendStatus === "loading" ? "Sending..." : "Resend code by Email"}
+          </button>
 
           <Button type="submit" className="w-full h-11 text-base">
             Verify
