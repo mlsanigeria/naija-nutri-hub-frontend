@@ -75,6 +75,32 @@ export const SignUpForm = () => {
 
       const message = parseErrorMessage(responseDetail);
 
+      // Handle partial success case: user created but email had issues
+      // If the message indicates user was created and OTP was sent, treat as success
+      const lowerMessage = message.toLowerCase();
+      if (
+        lowerMessage.includes("user created") &&
+        lowerMessage.includes("otp sent successfully")
+      ) {
+        toast.success("Account created! Check your email for verification.");
+        router.push(
+          `/verify-account?email=${encodeURIComponent(values.email)}`,
+        );
+        return;
+      }
+
+      // For other "user created" cases, show a friendlier message
+      if (lowerMessage.includes("user created")) {
+        const friendlyMessage =
+          "Account created. Please check your email for verification code.";
+        setError(friendlyMessage);
+        toast.info(friendlyMessage);
+        router.push(
+          `/verify-account?email=${encodeURIComponent(values.email)}`,
+        );
+        return;
+      }
+
       setError(message);
       toast.error(message);
     } finally {
