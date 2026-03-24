@@ -1,9 +1,8 @@
 "use client";
 
 import { ArrowLeft, Upload, Loader2, X } from "lucide-react";
-import { useState, useEffect, useRef, DragEvent } from "react";
+import { useState, useEffect, useRef, DragEvent, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
-import Link from "next/link";
 import Image from "next/image";
 import { axiosInstance } from "@/lib/axios";
 import { useAuthStore } from "@/stores/auth";
@@ -28,7 +27,7 @@ interface HistoryClassificationData {
   fromHistory?: boolean;
 }
 
-export default function UploadImagePage() {
+function UploadImageContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const user = useAuthStore((s) => s.user);
@@ -40,7 +39,6 @@ export default function UploadImagePage() {
   const [loadingHistory, setLoadingHistory] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<IClassificationResult | null>(null);
-  const [imageBlob, setImageBlob] = useState<Blob | null>(null);
   const fromHistory = searchParams.get("fromHistory") === "true";
   const processedRef = useRef(false);
 
@@ -86,7 +84,6 @@ export default function UploadImagePage() {
           type: data.content_type || "image/jpeg",
         });
 
-        setImageBlob(blob);
         setSelectedImage(file);
         setPreviewUrl(url);
 
@@ -312,5 +309,19 @@ export default function UploadImagePage() {
         </p>
       </div>
     </div>
+  );
+}
+
+export default function UploadImagePage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-[#1A1A1A] flex items-center justify-center">
+          <Loader2 className="h-8 w-8 animate-spin text-[#FF7A50]" />
+        </div>
+      }
+    >
+      <UploadImageContent />
+    </Suspense>
   );
 }

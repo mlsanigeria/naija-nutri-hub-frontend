@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowLeft, Image, Upload } from "lucide-react";
+import { ArrowLeft, Image as ImageIcon, Upload } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ProfileDropdown } from "@/components/ui/profile-dropdown";
@@ -38,7 +38,7 @@ export default function ScanPage() {
             variant="outline"
             className="w-full bg-card hover:bg-secondary border border-border flex items-center justify-center gap-2 px-5 py-7"
           >
-            <Image size={18} />
+            <ImageIcon size={18} />
             Scan an image
           </Button>
         </Link>

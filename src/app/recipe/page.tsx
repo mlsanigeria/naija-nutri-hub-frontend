@@ -102,7 +102,6 @@ function RecipeContent() {
       setFoodNameInput(foodNameFromUrl);
       setCurrentFoodName(foodNameFromUrl);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hasHydrated, user?.token, foodNameFromUrl]);
 
   const handleSubmit = (e: React.FormEvent) => {

@@ -120,7 +120,6 @@ export default function ClassificationResultPage() {
         URL.revokeObjectURL(blobUrlRef.current);
       }
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hasHydrated, user?.token, router]);
 
   // Reclassify the image
