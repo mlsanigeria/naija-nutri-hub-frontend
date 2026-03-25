@@ -136,7 +136,7 @@ function VerifyResetOtpContent() {
               href="/forgot-password"
               className="hover:text-primary transition-colors"
             >
-              Resend code by Email
+              Resend code
             </a>
           </p>
 
