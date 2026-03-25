@@ -109,7 +109,7 @@ export const SignUpForm = () => {
   }
 
   return (
-    <div className="flex flex-col items-center text-center space-y-8 w-full max-w-md px-4">
+    <div className="flex flex-col items-center text-center space-y-8 w-full max-w-md px-4 pb-8">
       {/* Logo */}
       <Image
         src="/images/logo.png"
