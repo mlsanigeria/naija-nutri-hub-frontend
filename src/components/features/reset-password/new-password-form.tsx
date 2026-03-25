@@ -16,18 +16,19 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { toast } from "sonner";
 
 export const NewPasswordForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  // const searchParams = useSearchParams();
+  const searchParams = useSearchParams();
   const router = useRouter();
-  // const token = searchParams.get("token");
+  const email = searchParams.get("email") || localStorage.getItem("resetEmail");
 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [isSuccess, setIsSuccess] = useState(false); // 2. ADD state to track success
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const form = useForm<z.infer<typeof NewPasswordFormSchema>>({
     resolver: zodResolver(NewPasswordFormSchema),
@@ -35,28 +36,46 @@ export const NewPasswordForm = () => {
   });
 
   async function onSubmit(values: z.infer<typeof NewPasswordFormSchema>) {
-    console.log(values, error);
+    if (!email) {
+      toast.error(
+        "Email not found. Please restart the password reset process.",
+      );
+      return;
+    }
+
     setIsLoading(true);
     setError(null);
     try {
-      // --- API DOCUMENTATION STARTS HERE ---
-      // This is a placeholder for the real API call. A backend developer will replace this.
-      // const response = await api.resetPassword({ token, newPassword: values.newPassword });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/reset_password`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email,
+            new_password: values.newPassword,
+          }),
+        },
+      );
 
-      // Expected API Contract:
-      // Endpoint: POST /api/auth/reset-password
-      // Request Body: { token: string, newPassword: string }
-      // Success Response (200 OK): { message: "Password updated successfully" }
-      // Error Response (400 Bad Request): { error: "Invalid or expired token" }
-      // --- API DOCUMENTATION ENDS HERE ---
+      const data = await response.json();
 
-      // We simulate the API call so the loading spinner works
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-
-      // On success, set the success state to true
-      setIsSuccess(true);
+      if (response.ok) {
+        // Clear the stored email after successful reset
+        localStorage.removeItem("resetEmail");
+        setIsSuccess(true);
+      } else {
+        const errorMsg = Array.isArray(data.detail)
+          ? data.detail[0]?.msg
+          : typeof data.detail === "string"
+            ? data.detail
+            : "Failed to reset password";
+        setError(errorMsg);
+        toast.error(errorMsg);
+      }
     } catch {
       setError("Your password reset link may be invalid or expired.");
+      toast.error("Failed to reset password. Please try again.");
     } finally {
       setIsLoading(false);
     }

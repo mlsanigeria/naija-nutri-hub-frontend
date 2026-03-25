@@ -220,7 +220,7 @@ export const VerifyAccountForm = () => {
             disabled={resendStatus === "loading"}
             className="text-sm text-primary hover:underline disabled:opacity-50"
           >
-            {resendStatus === "loading" ? "Sending..." : "Resend code by Email"}
+            {resendStatus === "loading" ? "Sending..." : "Resend code"}
           </button>
 
           <Button type="submit" className="w-full h-11 text-base">
