@@ -18,7 +18,7 @@ export default function SignUpPage() {
             <ArrowLeft className="w-5 h-5" />
           </Link>
         </div>
-        <main className="w-full max-w-md flex-1">
+        <main className="w-full max-w-md">
           <SignUpForm />
         </main>
       </div>

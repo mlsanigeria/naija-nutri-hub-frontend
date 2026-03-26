@@ -15,7 +15,7 @@ export default function LoginPage() {
           <ArrowLeft className="w-5 h-5" />
         </Link>
       </div>
-      <main className="w-full max-w-md flex-1 flex flex-col justify-center">
+      <main className="w-full max-w-md">
         <header className="mb-8 text-center">
           <Image
             src="/images/logo.png"
