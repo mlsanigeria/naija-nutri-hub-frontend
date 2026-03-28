@@ -9,7 +9,8 @@ export const LoginFormSchema = z
       })
       .max(64, {
         message: "Email or username cannot exceed 64 characters.",
-      }),
+      })
+      .toLowerCase(),
     password: z
       .string()
       .min(1, {
