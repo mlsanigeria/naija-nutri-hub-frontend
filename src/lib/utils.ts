@@ -32,6 +32,13 @@ export const parseErrorMessage = (detail?: ErrorDetailField) => {
     const message = `${capitalizeText(location)}: ${msg}`;
 
     return message;
+  } else if (
+    detail &&
+    typeof detail === "object" &&
+    "message" in detail &&
+    typeof detail.message === "string"
+  ) {
+    return detail.message;
   } else if (typeof detail === "string") {
     return detail;
   } else {

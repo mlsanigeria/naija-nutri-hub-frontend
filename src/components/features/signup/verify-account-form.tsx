@@ -82,7 +82,13 @@ export const VerifyAccountForm = () => {
         setResendStatus("success");
       } else {
         const data = await response.json();
-        setErrorMessage(data?.detail?.[0]?.msg || "Failed to resend OTP");
+        const resendMessage =
+          typeof data?.detail === "string"
+            ? data.detail
+            : data?.detail?.message ||
+              data?.detail?.[0]?.msg ||
+              "Failed to resend OTP";
+        setErrorMessage(resendMessage);
         setResendStatus("error");
       }
     } catch {
@@ -118,7 +124,13 @@ export const VerifyAccountForm = () => {
       } else {
         console.error(result);
         setIsOtpIncorrect(true);
-        toast.error(result.message || "Invalid or expired OTP.");
+        const errorMessage =
+          typeof result?.detail === "string"
+            ? result.detail
+            : result?.detail?.message ||
+              result?.message ||
+              "Invalid or expired OTP.";
+        toast.error(errorMessage);
       }
     } catch (error) {
       console.error("Verification error:", error);
