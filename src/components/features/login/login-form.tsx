@@ -26,6 +26,12 @@ import { parseErrorMessage } from "@/lib/utils";
 import { ErrorDetailField } from "@/lib/types";
 import { useAuthStore } from "@/stores/auth";
 
+interface UnverifiedAccountDetail {
+  code?: string;
+  message?: string;
+  email?: string;
+}
+
 export function LoginForm() {
   const router = useRouter();
   const setUser = useAuthStore((s) => s.setUser);
@@ -86,6 +92,27 @@ export function LoginForm() {
       const responseDetail = (
         apiError as { response?: { data?: { detail?: ErrorDetailField } } }
       )?.response?.data?.detail;
+      const unverifiedDetail =
+        responseDetail &&
+        typeof responseDetail === "object" &&
+        !Array.isArray(responseDetail)
+          ? (responseDetail as UnverifiedAccountDetail)
+          : null;
+
+      if (
+        unverifiedDetail?.code === "ACCOUNT_NOT_VERIFIED" &&
+        unverifiedDetail.email
+      ) {
+        const message =
+          unverifiedDetail.message ||
+          "Account not verified. Please verify your account before logging in.";
+        setErrorMessage(message);
+        toast.error(message);
+        router.push(
+          `/verify-account?email=${encodeURIComponent(unverifiedDetail.email)}`,
+        );
+        return;
+      }
 
       const message = parseErrorMessage(responseDetail);
 
@@ -106,7 +133,7 @@ export function LoginForm() {
             render={({ field }) => (
               <FormItem className="space-y-2">
                 <FormLabel
-                  className="text-white text-sm leading-none"
+                  className="text-foreground text-sm leading-none"
                   style={{ fontFamily: "var(--font-manrope)" }}
                 >
                   Email or Username
@@ -116,7 +143,7 @@ export function LoginForm() {
                     <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-[#9e9e9e]" />
                     <Input
                       placeholder="Enter email or username"
-                      className="bg-[#222222] border border-[#444444] rounded-md pl-10 h-12 text-white"
+                      className="border border-border rounded-md pl-10 h-12"
                       {...field}
                     />
                   </div>
@@ -133,7 +160,7 @@ export function LoginForm() {
               <FormItem className="space-y-2">
                 <FormLabel
                   htmlFor="password"
-                  className="text-white text-sm leading-none"
+                  className="text-foreground text-sm leading-none"
                   style={{ fontFamily: "var(--font-manrope)" }}
                 >
                   Password
@@ -146,7 +173,7 @@ export function LoginForm() {
                       autoComplete="current-password"
                       id="password"
                       placeholder="Enter Password"
-                      className="bg-[#222222] border border-[#444444] rounded-md pl-10 pr-10 h-12 text-white"
+                      className="border border-border rounded-md pl-10 pr-10 h-12"
                       {...field}
                     />
                     <Image
@@ -187,7 +214,7 @@ export function LoginForm() {
                 className={`w-5 h-5 border rounded cursor-pointer flex items-center justify-center ${
                   rememberMe
                     ? "bg-[#FF7A50] border-[#FF7A50]"
-                    : "border-[#444444]"
+                    : "border-border dark:border-[#444444]"
                 }`}
                 onClick={toggleRememberMe}
               >
@@ -210,7 +237,7 @@ export function LoginForm() {
                 )}
               </div>
               <label
-                className="text-white text-sm cursor-pointer leading-none"
+                className="text-foreground text-sm cursor-pointer leading-none"
                 style={{ fontFamily: "var(--font-manrope)" }}
                 onClick={toggleRememberMe}
               >
@@ -219,7 +246,7 @@ export function LoginForm() {
             </div>
             <Link
               href="/forgot-password"
-              className="text-sm text-white hover:text-[#FF7A50] leading-none"
+              className="text-sm text-foreground hover:text-[#FF7A50] leading-none"
               style={{ fontFamily: "var(--font-manrope)" }}
             >
               Forgot password?
